@@ -10,9 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< HEAD
     "browser-lang": "^0.2.1",
     "i18n-js": "^4.3.2",
     "process": "^0.11.10",
+=======
+    "jwt-decode": "^4.0.0",
+>>>>>>> 413bcbe... Auth login register & logout
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.0",
