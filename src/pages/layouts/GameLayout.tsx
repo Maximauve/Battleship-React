@@ -1,10 +1,12 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 const GameLayout: React.FC = () => {
 
   return (
     <div>
-      <h1>Game Layout</h1>
+      <p>Game Layout</p>
+      <Outlet />
     </div>
   );
 };
