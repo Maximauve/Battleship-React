@@ -8,38 +8,38 @@ import GameLayout from 'src/pages/layouts/GameLayout';
 import GlobalLayout from 'src/pages/layouts/GlobalLayout';
 
 const router = createBrowserRouter([
-	{
-		path: '/',
-		element: <GlobalLayout />,
-		children: [
-			{
-				index: true,
-				element: <Home />,
-			},
-			{
-				path: 'game',
-				element: <GameLayout />,
-				children: [
-					{
-						path: 'lobby/:id',
-						element: <PreGame />,
-					},
-					{
-						path: ':id',
-						element: <Game />,
-					}
-				],
-			},
-		],
-	},
-	{
-		path: '/login',
-		element: <Login />,
-	},
-	{
-		path: '/register',
-		element: <Register />,
-	}
+  {
+    path: '/',
+    element: <GlobalLayout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: 'game',
+        element: <GameLayout />,
+        children: [
+          {
+            path: 'lobby/:id',
+            element: <PreGame />,
+          },
+          {
+            path: ':id',
+            element: <Game />,
+          }
+        ],
+      },
+    ],
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/register',
+    element: <Register />,
+  }
 ]);
 
 export default router;
