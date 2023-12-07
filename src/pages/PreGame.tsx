@@ -11,7 +11,6 @@ const PreGame: React.FC = () => {
 	const [{ user }] = useContext(UserContext);
 	const socket = useSocket();
 	const [members, setMembers] = useState<UserRoom[]>([]);
-	const [myUser, setMyUser] = useState<UserRoom | undefined>(undefined);
 	const [gameStatus, setGameStatus] = useState<GameStatus>(GameStatus.UNSTARTED);
 
 	const startGame = () => {
@@ -25,8 +24,13 @@ const PreGame: React.FC = () => {
 	}
 
 	useEffect(() => {
-		if (id === undefined) {
+		if (!user) {
+			navigate('/login');
+			return;
+		} else if (id === undefined) {
 			navigate('/');
+		} else if (gameStatus !== GameStatus.UNSTARTED) {
+			navigate(`/game/${id}`);
 		}
 
 		socket?.on('connect', () => {
@@ -45,14 +49,13 @@ const PreGame: React.FC = () => {
 		socket?.on('members', (newMembers: UserRoom[]) => {
 			setMembers(newMembers);
 			console.log('myUser : ', newMembers.find((member) => member.socketId === socket?.id));
-			setMyUser(newMembers.find((member) => member.socketId === socket?.id));
 		});
 
 		socket?.on('gameStatus', (status: GameStatus) => {
 			console.log('gameStatus : ', status);
 			setGameStatus(status);
 		});
-	});
+	}, [gameStatus, id, navigate, socket, user]);
 
 	return (
 		<>
