@@ -4,6 +4,8 @@ import { UserContext } from 'src/contexts/user/UserProvider';
 const Home: React.FC = () => {
   const [{ user }] = useContext(UserContext);
 
+	const [{ user }] = useContext(UserContext);
+
   return (
     <div>
       <h1>Home</h1>
