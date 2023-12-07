@@ -6,6 +6,7 @@ export const UserContext = createContext<[UserState, Dispatch<Action<UserActionT
 	initialUserState,
 	() => null
 ]);
+
 const initializeState = (): UserState => {
 	const user = localStorage.getItem('user');
 	if (user != null) {
