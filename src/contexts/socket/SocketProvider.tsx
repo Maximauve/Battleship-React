@@ -13,7 +13,7 @@ const initializeState = ({user, slug}: Props): SocketState => {
 	if (user !== undefined && slug !== undefined) {
 		console.log('[SocketProvider] User is defined : ', user);
 		const state: SocketState = {
-			socket: io(process.env.REACT_APP_WS_URL as string, { query: { token: user.access_token, slug: slug } }),
+			socket: io(import.meta.env.VITE_REACT_APP_WS_URL as string, { query: { token: user.access_token, slug: slug } }),
 			loading: false
 		};
 		console.log('[SocketProvider] initializeState : ', state);

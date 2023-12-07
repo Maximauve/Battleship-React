@@ -6,7 +6,7 @@ import { type UserLoginDTO } from 'src/types/user/UserLoginDTO';
 import { type UserRegisterDTO } from 'src/types/user/UserRegisterDTO';
 import { type User } from 'src/types/user/User';
 
-const useUser = () => {	
+const useUser = () => {
   const [, dispatch] = useContext(UserContext);
 
   const logIn = async (userDto: UserLoginDTO): Promise<void> => {

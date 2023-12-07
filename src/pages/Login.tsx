@@ -14,7 +14,6 @@ const Login: React.FC = () => {
 
   const { logIn } = useUser();
 
-
   const handleLogin = () => {
     console.log('Login');
     logIn({ email, password }).then(() => {

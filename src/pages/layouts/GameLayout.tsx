@@ -15,9 +15,8 @@ const GameLayout: React.FC = () => {
 	}, [id, navigate]);
 
 	if (user === undefined) {
-		return (
-			<div>Login Modal</div>
-		)
+		navigate('/login');
+		return;
 	}
 
 	return (
