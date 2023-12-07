@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useUser from "src/hooks/user/useUser";
+import useUser from "src/hooks/useUser";
 
 const Register: React.FC = () => {
 	const [email, setEmail] = useState<string>('');
@@ -17,18 +17,18 @@ const Register: React.FC = () => {
 			console.log('Register response');
 			nagivate('/');
 		}).catch((err) => {
-      setError(err.message);
-    });
+			setError(err.message);
+		});
 	}
 
 	return (
 		<>
 			<h1>Register</h1>
 			{error && <div>{error}</div>}
-			<input type="text" value={username} onChange={(event) => setUsername(event.target.value)} placeholder="Username"/>
-			<input type="text" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email"/>
-			<input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password"/>
-			<input type="password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} placeholder="Confirm Password"/>
+			<input type="text" value={username} onChange={(event) => setUsername(event.target.value)} placeholder="Username" />
+			<input type="text" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
+			<input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" />
+			<input type="password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} placeholder="Confirm Password" />
 			<button onClick={handleRegister}>Register</button>
 		</>
 	);

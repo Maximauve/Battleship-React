@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useUser from "src/hooks/user/useUser";
+import useUser from "src/hooks/useUser";
 
 const Login: React.FC = () => {
 	const [email, setEmail] = useState<string>('');
@@ -17,16 +17,16 @@ const Login: React.FC = () => {
 			console.log('Login response');
 			nagivate('/');
 		}).catch((err) => {
-      setError(err.message);
-    });
+			setError(err.message);
+		});
 	}
 
 	return (
 		<>
 			<h1>Login</h1>
 			{error && <div>{error}</div>}
-			<input type="text" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email"/>
-			<input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password"/>
+			<input type="text" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
+			<input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" />
 			<button onClick={handleLogin}>Login</button>
 		</>
 	);

@@ -2,11 +2,11 @@ import { useContext } from 'react';
 import api from 'src/config/api';
 import { UserContext } from 'src/contexts/user/UserProvider';
 import { UserActionType } from 'src/contexts/user/userReducer';
-import { type UserLoginDTO } from 'src/types/user/UserLoginDTO';
-import { type UserRegisterDTO } from 'src/types/user/UserRegisterDTO';
-import { type User } from 'src/types/user/User';
+import { type UserLoginDTO } from '../types/user/UserLoginDTO';
+import { type UserRegisterDTO } from '../types/user/UserRegisterDTO';
+import { type User } from '../types/user/User';
 
-const useUser = () => {	
+const useUser = () => {
   const [, dispatch] = useContext(UserContext);
 
   const logIn = async (userDto: UserLoginDTO): Promise<void> => {

@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import useUser from "src/hooks/user/useUser";
+import useUser from "src/hooks/useUser";
 
 const Logout = () => {
 	const { logOut } = useUser();
 	const navigate = useNavigate();
 
-	useEffect	(() => {
+	useEffect(() => {
 		localStorage.removeItem('user');
 		logOut();
-    navigate('/');
+		navigate('/');
 	}, [logOut, navigate]);
 
 	return (
