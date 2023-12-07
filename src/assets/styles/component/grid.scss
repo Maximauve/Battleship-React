@@ -1,0 +1,23 @@
+.grid {
+    display: grid;
+    grid-template-rows: repeat(10, 1fr);
+    
+    &:hover {
+        cursor: pointer;
+    }
+
+    .row {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+    }
+
+    .cell {
+        border: 1px solid black;
+        width: 8vw;
+        height: 8vw;
+        max-height: 50px;
+        max-width: 50px;
+        background-color: #3c3c3c;
+        cursor: pointer;
+    }
+}
