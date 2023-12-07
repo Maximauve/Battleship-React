@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "esnext",
-		"module":"esnext",
+    "module": "esnext",
     "useDefineForClassFields": true,
     "lib": [
       "ESNExt",
@@ -19,7 +19,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
-	"types": ["node"],
   },
   "include": [
     "src"

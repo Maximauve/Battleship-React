@@ -1,14 +1,16 @@
-import './App.css'
 import { RouterProvider } from 'react-router-dom'
-import router from './config/router'
-import AppProvider from './contexts/app/AppProvider'
-import UserProvider from './contexts/user/UserProvider'
+import router from 'src/config/router'
+import AppProvider from 'src/contexts/app/AppProvider'
+import UserProvider from 'src/contexts/user/UserProvider'
+import ErrorProvider from 'src/contexts/error/ErrorProvider'
 
 function App() {
   return (
     <AppProvider>
       <UserProvider>
-        <RouterProvider router={router} />
+        <ErrorProvider>
+          <RouterProvider router={router} />
+        </ErrorProvider>
       </UserProvider>
     </AppProvider>
   )

@@ -1,0 +1,23 @@
+@import '/src/assets/styles/_base/colors.scss';
+
+.error-wrapper {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  margin-top: 2rem;
+}
+
+.error {
+  background-color: $errorBg;
+  border-radius: 25px;
+
+  p {
+    color: $errorText;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+}
