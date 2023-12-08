@@ -1,7 +1,7 @@
 import useTranslations from 'src/hooks/useTranslation';
 import React, { useContext, useEffect, useState } from 'react';
-import { Grid } from 'src/component/game/Grid';
-import { emptyGrid } from 'src/config/grid';
+import { GridBoats } from 'src/component/game/GridBoats';
+import { emptyGrid, generateRandomFleet } from 'src/config/grid';
 import { UserContext } from 'src/contexts/user/UserProvider';
 import useSocket from 'src/hooks/useSocket';
 import { GameStatus } from 'src/types/GameOptions';
@@ -12,7 +12,7 @@ const Game: React.FC = () => {
 	const [battlePlace, setBattlePlace] = useState<string[][]>(emptyGrid);
 	const [gameStatus, setGameStatus] = useState<string>(GameStatus.PLACE_SHIPS);
 	const [members, setMembers] = useState<UserRoom[]>([]);
-	const [shipsIndexes, setShipsIndexes] = useState<{ [key: string]: { x: number, y: number }[] }>({});
+	const [shipsIndexes, setShipsIndexes] = useState<{ [key: string]: { x: number, y: number }[] }>(generateRandomFleet());
 	const socket = useSocket();
 	const [{ user }] = useContext(UserContext);
 
@@ -50,7 +50,7 @@ const Game: React.FC = () => {
 			<div>
 				<h1>Game</h1>
 				{user && <div>{user.username} est connecté !</div>}
-				<Grid grid={playerBoats} shipsIndexes={shipsIndexes}/>
+				<GridBoats grid={playerBoats} shipsIndexes={shipsIndexes}/>
 			</div>
 		);
 	}
