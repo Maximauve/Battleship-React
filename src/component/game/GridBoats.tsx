@@ -6,7 +6,7 @@ export interface GridProps {
 		shipsIndexes?: { [key: string]: { x: number, y: number }[] }
 }
 
-export const Grid: React.FC<GridProps> = ({ grid, shipsIndexes }) => {
+export const GridBoats: React.FC<GridProps> = ({ grid, shipsIndexes }) => {
 
 	// const shipsIndexes: { [key: string]: { x: number, y: number }[] } = {
   //   1 : [{ x: 0, y: 1 }, { x: 0, y: 2 }, { x: 0, y: 3 }, { x: 0, y: 4 }, { x: 0, y: 5 }],

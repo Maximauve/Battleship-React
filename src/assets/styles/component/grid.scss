@@ -56,7 +56,6 @@
     }
 
     &.placing {
-
         display: grid;
         grid-template-rows: repeat(10, min(8vw, 50px));
         grid-template-columns: repeat(10, min(8vw, 50px));
