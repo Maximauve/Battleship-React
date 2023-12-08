@@ -4,9 +4,15 @@ import 'src/assets/styles/components/Error.scss';
 
 const ErrorPopin: React.FC<PropsWithChildren> = ({ children }) => {
 
+  if (!children) {
+    return null;
+  }
+
   return (
-    <div className="error">
-      {children}
+    <div className="error-wrapper">
+      <div className="error">
+        {children}
+      </div>
     </div>
   );
 }

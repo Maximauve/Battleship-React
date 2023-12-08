@@ -18,6 +18,7 @@ const Login: React.FC = () => {
     console.log('Login');
     logIn({ email, password }).then(() => {
       console.log('Login response, redirect : ', state?.from);
+      setError(null);
       nagivate(state?.from ? state.from : '/');
     }).catch((err) => {
       setError(

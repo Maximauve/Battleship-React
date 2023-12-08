@@ -17,6 +17,7 @@ const Register: React.FC = () => {
     console.log('Register');
     signUp({ username, email, password }).then(() => {
       console.log('Register response');
+      setError(null);
       nagivate(state?.from ? state.from : '/');
     }).catch((err) => {
       setError(
