@@ -1,23 +1,65 @@
+.grid-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
 .grid {
-    display: grid;
-    grid-template-rows: repeat(10, 1fr);
+
+    position: absolute;
     
-    &:hover {
-        cursor: pointer;
-    }
+    &.playing {
 
-    .row {
         display: grid;
-        grid-template-columns: repeat(10, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        grid-gap: 5px;
+        
+        padding: 2vw ;
+
+        .row {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            grid-gap: 5px;
+        }
+
+        .cell {
+            width: 8vw;
+            height: 8vw;
+            max-height: 50px;
+            max-width: 50px;
+            content: "";
+            border-radius: 5px;
+            background-color: #3c3c3c;
+            cursor: url(../../images/cursor.svg) 15 15, auto;
+
+            &:hover {
+                background-color: #5c5c5c;
+            }
+
+            &.miss {
+                background-color: rgba(104, 240, 255, 0.5);
+            }
+
+            &.hit {
+                background-color: rgba(255, 0, 0, 0.5);
+            }
+
+        }
     }
 
-    .cell {
-        border: 1px solid black;
-        width: 8vw;
-        height: 8vw;
-        max-height: 50px;
-        max-width: 50px;
-        background-color: #3c3c3c;
-        cursor: pointer;
+    &.placing {
+
+        display: grid;
+        grid-template-rows: repeat(10, min(8vw, 50px));
+        grid-template-columns: repeat(10, min(8vw, 50px));
+        grid-gap: 5px;
+        margin: 2vw ;
+
+        .ship {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 144, 0, 0.5);
+            border-radius: 5px;
+        }
     }
 }
