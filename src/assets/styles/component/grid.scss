@@ -1,72 +1,80 @@
 .grid-wrapper {
-    position: relative;
-    display: flex;
-    justify-content: center;
+	position: relative;
+	display: flex;
+	justify-content: center;
 }
 
 .grid {
 
-    position: absolute;
-    
-    &.playing {
+	position: absolute;
 
-        display: grid;
-        grid-template-rows: repeat(10, 1fr);
-        grid-gap: 5px;
-        
-        padding: 2vw ;
+	&.playing {
 
-        .row {
-            display: grid;
-            grid-template-columns: repeat(10, 1fr);
-            grid-gap: 5px;
-        }
+		display: grid;
+		grid-template-rows: repeat(10, 1fr);
+		grid-gap: 5px;
+		
 
-        .cell {
-            width: 8vw;
-            height: 8vw;
-            max-height: 50px;
-            max-width: 50px;
-            content: "";
-            border-radius: 5px;
-            background-color: #3c3c3c;
-            cursor: url(../../images/cursor.svg) 15 15, auto;
+		padding: 2vw;
 
-            &:hover {
-							background-color: #5c5c5c;
-            }
+		.row {
+			display: grid;
+			grid-template-columns: repeat(10, 1fr);
+			grid-gap: 5px;
+		}
 
-            &.M {
-							background-color: rgba(104, 240, 255, 0.5);
-            }
+		.cell {
+			width: 8vw;
+			height: 8vw;
+			max-height: 50px;
+			max-width: 50px;
+			content: "";
+			border-radius: 5px;
+			background-color: #3c3c3c;
+			cursor: url(../../images/cursor.svg) 15 15, auto;
+			z-index:10;
 
-            &.H {
-							background-color: rgba(255, 0, 0, 0.5);
-            }
+			&:hover {
+				background-color: #5c5c5c;
+			}
 
-						&.D {
-							background-color: rgba(255, 255, 0, 0.5);
-						}
+			&.M {
+				background-color: rgba(104, 240, 255, 0.5);
+			}
 
-						&.E {
-							background-color: rgba(0, 0, 0, 0.5);
-						}
+			&.H {
+				background-color: rgba(255, 0, 0, 0.5);
+			}
 
-        }
-    }
+			&.D {
+				background-color: rgba(255, 255, 0, 0.5);
+			}
 
-    &.placing {
-        display: grid;
-        grid-template-rows: repeat(10, min(8vw, 50px));
-        grid-template-columns: repeat(10, min(8vw, 50px));
-        grid-gap: 5px;
-        margin: 2vw ;
+			&.E {
+				background-color: rgba(0, 0, 0, 0.5);
+			}
 
-        .ship {
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 144, 0, 0.5);
-            border-radius: 5px;
-        }
-    }
+		}
+	}
+
+	&.placing {
+		display: grid;
+		grid-template-rows: repeat(10, min(8vw, 50px));
+		grid-template-columns: repeat(10, min(8vw, 50px));
+		grid-gap: 5px;
+		margin: 2vw;
+
+		.ship {
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 144, 0, 0.5);
+			border-radius: 5px;
+			z-index:20;
+		}
+	}
+}
+
+.grid.drop-hover {
+	border: 2px dashed #3498db;
+	/* Couleur de la bordure lors du survol pour déposer */
 }

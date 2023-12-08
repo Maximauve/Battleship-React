@@ -1,3 +1,4 @@
+import { Coordinate } from 'src/types/game/Coordinate';
 import { Ship } from 'src/types/game/Ship';
 
 export const emptyGrid = Array(10).fill(Array(10).fill('E'));
@@ -48,6 +49,11 @@ function convertShipsToIndexes(ships: Ship[]): { [key: string]: { x: number; y: 
   });
 
   return shipsIndexes;
+}
+
+export function isVertical(shipCoordinates: Coordinate[]): boolean {
+  const uniqueXValues = new Set(shipCoordinates.map(coord => coord.x));
+  return uniqueXValues.size === 1;
 }
 
 
