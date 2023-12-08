@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import { UserContext } from 'src/contexts/user/UserProvider';
 
 const Home: React.FC = () => {
-
-	const [{ user }] = useContext(UserContext);
+  const [{ user }] = useContext(UserContext);
 
   return (
     <div>
