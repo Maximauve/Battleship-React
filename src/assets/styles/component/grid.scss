@@ -33,16 +33,24 @@
             cursor: url(../../images/cursor.svg) 15 15, auto;
 
             &:hover {
-                background-color: #5c5c5c;
+							background-color: #5c5c5c;
             }
 
-            &.miss {
-                background-color: rgba(104, 240, 255, 0.5);
+            &.M {
+							background-color: rgba(104, 240, 255, 0.5);
             }
 
-            &.hit {
-                background-color: rgba(255, 0, 0, 0.5);
+            &.H {
+							background-color: rgba(255, 0, 0, 0.5);
             }
+
+						&.D {
+							background-color: rgba(255, 255, 0, 0.5);
+						}
+
+						&.E {
+							background-color: rgba(0, 0, 0, 0.5);
+						}
 
         }
     }

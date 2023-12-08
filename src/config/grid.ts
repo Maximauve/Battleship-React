@@ -1,0 +1,1 @@
+export const emptyGrid = Array(10).fill(Array(10).fill('E'));
