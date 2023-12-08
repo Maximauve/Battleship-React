@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ErrorContext } from "src/contexts/error/ErrorProvider";
-import useUser from "src/hooks/user/useUser";
+import useTranslations from "src/hooks/useTranslation";
+import useUser from "src/hooks/useUser";
 
 const Register: React.FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -12,6 +13,7 @@ const Register: React.FC = () => {
   const { setError } = useContext(ErrorContext);
   const { signUp } = useUser();
   const { state } = useLocation();
+  const i18n = useTranslations();
 
   const handleRegister = () => {
     console.log('Register');
@@ -30,12 +32,12 @@ const Register: React.FC = () => {
 
   return (
     <>
-      <h1>Register</h1>
-      <input type="text" value={username} onChange={(event) => setUsername(event.target.value)} placeholder="Username" />
-      <input type="text" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
-      <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" />
-      <input type="password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} placeholder="Confirm Password" />
-      <button onClick={handleRegister}>Register</button>
+      <h1>{i18n.t('register.h1')}</h1>
+      <input type="text" value={username} onChange={(event) => setUsername(event.target.value)} placeholder={i18n.t('register.placeholder.username')} />
+      <input type="text" value={email} onChange={(event) => setEmail(event.target.value)} placeholder={i18n.t('register.placeholder.email')} />
+      <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder={i18n.t('register.placeholder.password')} />
+      <input type="password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} placeholder={i18n.t('register.placeholder.confirmPassword')} />
+      <button onClick={handleRegister}>{i18n.t('register.submit')}</button>
     </>
   );
 }
