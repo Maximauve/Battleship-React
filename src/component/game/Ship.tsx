@@ -1,20 +1,21 @@
 import React from 'react';
 import { useDrag } from 'react-dnd';
+import {GridCoordinate} from "../../types/game/Coordinate";
 
 interface Props {
 	id: string;
 	length: number;
 	isVertical: boolean;
-	position: { gridRowStart: number, gridRowEnd: number, gridColumnStart: number, gridColumnEnd: number };
+	position: GridCoordinate;
 }
 
 const Ship: React.FC<Props> = ({ id, length, isVertical, position }) => {
   const [{ isDragging }, drag] = useDrag({
     type: 'ship',
-    item: { id, length, isVertical },
-		collect: (monitor) => ({
-			isDragging: monitor.isDragging(),
-		}),
+    item: { id, length, isVertical, position },
+    collect: (monitor) => ({
+        isDragging: monitor.isDragging(),
+    }),
   });
 
   return (
