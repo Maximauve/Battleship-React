@@ -26,7 +26,7 @@ function generateRandomShip(length: number, existingShips: Ship[]) {
 	for (let i = 0; i < length; i++) {
 		position.push({
 			x: isVertical ? startX : startX + i,
-      y: isVertical ? startY + i : startY,
+            y: isVertical ? startY + i : startY,
     });
   }
 	const newShip: Ship = {
@@ -80,4 +80,30 @@ export function generateRandomFleet(): { [key: string]: { x: number; y: number }
 	existingShips = [...fleet];
 
 	return convertShipsToIndexes(fleet);
+}
+
+export function canMove(updatedShip:  {[p: string]: {x: number, y: number}[]}): boolean {
+    for (const ship of Object.values(updatedShip)) {
+        for (const pos of ship) {
+            if (pos.x < 0 || pos.x > 9 || pos.y < 0 || pos.y > 9) {
+                return false;
+            }
+            for (const shipId in updatedShip) {
+                const currentShipCoordinates = updatedShip[shipId];
+
+                for (const otherShipId in updatedShip) {
+                    if (otherShipId !== shipId) {
+                        const otherShipCoordinates = updatedShip[otherShipId];
+
+                        for (const coord of otherShipCoordinates) {
+                            if (currentShipCoordinates.some(currentCoord => currentCoord.x === coord.x && currentCoord.y === coord.y)) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return true
 }

@@ -1,7 +1,7 @@
 import React, {useRef, useState} from "react";
 import 'src/assets/styles/component/Grid.scss';
 import Ship from "./Ship";
-import { isVertical } from "src/config/grid";
+import {canMove, isVertical} from "src/config/grid";
 import {Coordinate, GridCoordinate} from "src/types/game/Coordinate";
 import { useDrop } from "react-dnd";
 
@@ -51,8 +51,9 @@ export const GridBoats: React.FC<GridProps> = ({ grid, shipsIndexes }) => {
 			y: coord.y + rowOffset,
 		}));
 
-		// Mettez à jour l'état avec les nouvelles coordonnées du bateau
-		setShipsState(updatedShips);
+		if (canMove(updatedShips)) {
+			setShipsState(updatedShips);
+		}
 	};
 
 	const [{ canDrop, isOver }, drop] = useDrop({
