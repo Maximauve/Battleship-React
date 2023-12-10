@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useRef} from "react";
 import 'src/assets/styles/component/Grid.scss';
 import Ship from "./Ship";
 import {canMove, isVertical} from "src/config/grid";
@@ -7,12 +7,12 @@ import { useDrop } from "react-dnd";
 
 export interface GridProps {
 	grid: string[][]
-	shipsIndexes?: { [key: string]: { x: number, y: number }[] }
+	shipsIndexes: { [key: string]: { x: number, y: number }[] }
+	setShipsIndexes: (shipIndexes: { [key: string]: { x: number, y: number }[] }) => void
 }
 
-export const GridBoats: React.FC<GridProps> = ({ grid, shipsIndexes }) => {
+export const GridBoats: React.FC<GridProps> = ({ grid, shipsIndexes, setShipsIndexes }) => {
 	const gridRef = useRef<HTMLDivElement | null>(null)
-	const [shipsState, setShipsState] = useState(shipsIndexes);
 
 
 	// const shipsIndexes: { [key: string]: { x: number, y: number }[] } = {
@@ -38,7 +38,7 @@ export const GridBoats: React.FC<GridProps> = ({ grid, shipsIndexes }) => {
 	};
 
 	const moveShip = (shipId: string, initialRow: number, initialCol: number, newRow: number, newCol: number) => {
-		const updatedShips = { ...shipsState };
+		const updatedShips = { ...shipsIndexes };
 		const shipCoordinates = updatedShips[shipId];
 
 		// Calculez le décalage nécessaire pour déplacer le bateau à sa nouvelle position
@@ -52,7 +52,7 @@ export const GridBoats: React.FC<GridProps> = ({ grid, shipsIndexes }) => {
 		}));
 
 		if (canMove(updatedShips)) {
-			setShipsState(updatedShips);
+			setShipsIndexes(updatedShips);
 		}
 	};
 
@@ -110,7 +110,7 @@ export const GridBoats: React.FC<GridProps> = ({ grid, shipsIndexes }) => {
 				))}
 			</div>
 			<div className="grid placing">
-				{shipsState && renderShips(shipsState)}
+				{shipsIndexes && renderShips(shipsIndexes)}
 			</div>
 		</div>
 	);

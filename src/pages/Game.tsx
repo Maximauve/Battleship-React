@@ -15,6 +15,16 @@ const Game: React.FC = () => {
 	const socket = useSocket();
 	const [{ user }] = useContext(UserContext);
 
+	const placeShips = () => {
+		socket?.emitWithAck('placeShips', shipsIndexes).then((response: any) => {
+			if (response.hasOwnProperty('error')) {
+				console.log('error from placeShips : ', response.error);
+			}
+		}).catch((err) => {
+			console.error(err);
+		});
+	}
+
 	useEffect(() => {
 		socket?.on('gameStatus', (status: GameStatus) => {
 			console.log("[GAME] gameStatus : ", status);
@@ -47,7 +57,8 @@ const Game: React.FC = () => {
 			<div>
 				<h1>Game</h1>
 				{user && <div>{user.username} est connecté !</div>}
-				<GridBoats grid={playerBoats} shipsIndexes={shipsIndexes}/>
+				<GridBoats grid={playerBoats} shipsIndexes={shipsIndexes} setShipsIndexes={setShipsIndexes}/>
+				<button onClick={() => placeShips()}>Placer mes bateaux</button>
 			</div>
 		);
 	}
