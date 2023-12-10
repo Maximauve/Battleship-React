@@ -15,8 +15,17 @@ const Game: React.FC = () => {
 	const [shipsIndexes, setShipsIndexes] = useState<{ [key: string]: { x: number, y: number }[] }>(generateRandomFleet());
 	const socket = useSocket();
 	const [{ user }] = useContext(UserContext);
-
 	const i18n = useTranslations();
+
+	const placeShips = () => {
+		socket?.emitWithAck('placeShips', shipsIndexes).then((response: any) => {
+			if (response.hasOwnProperty('error')) {
+				console.log('error from placeShips : ', response.error);
+			}
+		}).catch((err) => {
+			console.error(err);
+		});
+	}
 
 	useEffect(() => {
 		socket?.on('gameStatus', (status: GameStatus) => {
@@ -50,7 +59,8 @@ const Game: React.FC = () => {
 			<div>
 				<h1>Game</h1>
 				{user && <div>{user.username} est connecté !</div>}
-				<GridBoats grid={playerBoats} shipsIndexes={shipsIndexes}/>
+				<GridBoats grid={playerBoats} shipsIndexes={shipsIndexes} setShipsIndexes={setShipsIndexes}/>
+				<button onClick={() => placeShips()}>Placer mes bateaux</button>
 			</div>
 		);
 	}
