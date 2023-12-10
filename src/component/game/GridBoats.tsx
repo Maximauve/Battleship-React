@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, {useRef, useState} from "react";
 import 'src/assets/styles/component/Grid.scss';
 import Ship from "./Ship";
 import { isVertical } from "src/config/grid";
-import { Coordinate } from "src/types/game/Coordinate";
+import {Coordinate, GridCoordinate} from "src/types/game/Coordinate";
 import { useDrop } from "react-dnd";
 
 export interface GridProps {
@@ -11,6 +11,7 @@ export interface GridProps {
 }
 
 export const GridBoats: React.FC<GridProps> = ({ grid, shipsIndexes }) => {
+	const gridRef = useRef<HTMLDivElement | null>(null)
 	const [shipsState, setShipsState] = useState(shipsIndexes);
 
 
@@ -36,16 +37,14 @@ export const GridBoats: React.FC<GridProps> = ({ grid, shipsIndexes }) => {
 		});
 	};
 
-	const moveShip = (shipId: string, newRow: number, newCol: number) => {
+	const moveShip = (shipId: string, initialRow: number, initialCol: number, newRow: number, newCol: number) => {
 		const updatedShips = { ...shipsState };
 		const shipCoordinates = updatedShips[shipId];
 
-		console.log(shipCoordinates)
 		// Calculez le décalage nécessaire pour déplacer le bateau à sa nouvelle position
-		const rowOffset = newRow - shipCoordinates[0].y;
-		const colOffset = newCol - shipCoordinates[0].x;
+		const rowOffset = newRow - initialRow;
+		const colOffset = newCol - initialCol;
 
-		console.log(rowOffset, colOffset)
 		// Mettez à jour les coordonnées de chaque partie du bateau
 		updatedShips[shipId] = shipCoordinates.map((coord: Coordinate) => ({
 			x: coord.x + colOffset,
@@ -58,13 +57,34 @@ export const GridBoats: React.FC<GridProps> = ({ grid, shipsIndexes }) => {
 
 	const [{ canDrop, isOver }, drop] = useDrop({
 		accept: 'ship',
-		drop: (item: { id: string, length: number, isVertical: boolean }, monitor) => {
-			const droppedOnCell = monitor.getClientOffset();
-			if (droppedOnCell) {
-				const row = Math.floor(droppedOnCell.y / 50) - 6; // 40px est la taille de la cellule
-				const col = Math.floor(droppedOnCell.x / 50) - 8;
-				console.log(row, col)
-				moveShip(item.id, row, col);
+		drop: (item: { id: string, length: number, isVertical: boolean, position: GridCoordinate }, monitor) => {
+
+			if (gridRef.current) {
+				const gridRect = gridRef.current.getBoundingClientRect();
+				const clientOffset = monitor.getClientOffset();
+				const initialSourceClientOffset = monitor.getInitialClientOffset();
+
+				let initialRow: number;
+				let initialCol: number;
+				let newRow: number;
+				let newCol: number;
+
+				if (initialSourceClientOffset) {
+					const relativeX = initialSourceClientOffset.x - gridRect.left - (2 * window.innerWidth / 100);
+					const relativeY = initialSourceClientOffset.y - gridRect.top - (2 * window.innerWidth / 100);
+
+					initialCol = Math.floor(relativeX / (50 + 5));
+					initialRow = Math.floor(relativeY / (50 + 5));
+				}
+
+				if (clientOffset) {
+					const relativeX = clientOffset.x - gridRect.left - (2 * window.innerWidth / 100);
+					const relativeY = clientOffset.y - gridRect.top - (2 * window.innerWidth / 100);
+
+					newRow = Math.floor(relativeY / (50 + 5));
+					newCol = Math.floor(relativeX / (50 + 5));
+				}
+				moveShip(item.id, initialRow!, initialCol!, newRow!, newCol!);
 			}
 		},
 		collect: (monitor) => ({
@@ -76,11 +96,14 @@ export const GridBoats: React.FC<GridProps> = ({ grid, shipsIndexes }) => {
 
 	return (
 		<div className="grid-wrapper">
-			<div className={`grid playing ${canDrop && isOver ? 'drop-hover' : ''}`} ref={drop}>
+			<div id="grid" className={`grid playing ${canDrop && isOver ? 'drop-hover' : ''}`} ref={(node) => {
+				gridRef.current = node;
+				drop(node);
+			}}>
 				{grid.map((row, i) => (
 					<div key={i} className="row">
 						{row.map((cell, j) => (
-							<div key={j} className={'cell ' + cell + (canDrop && isOver ? 'drop-hover' : '')}></div>
+							<div key={j} data-row={i} data-col={j} className={'cell ' + cell + (canDrop && isOver ? 'drop-hover' : '')}></div>
 						))}
 					</div>
 				))}
