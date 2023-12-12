@@ -20,7 +20,7 @@ const Home: React.FC = () => {
 			userId: user.id,
 			username: user.username,
 			socketId: null
-    };
+		};
 		redis.createRoom(obj, user).then((res) => {
 			navigate(`/game/lobby/${res.slug}`);
 		}).catch((err: any) => {
@@ -30,11 +30,11 @@ const Home: React.FC = () => {
 	}
 
 	const joinRoom = (room: string) => {
-		if (user === undefined) {
-      navigate('/login');
-      return;
-    }
-    navigate(`/game/lobby/${room}`);
+		if (!user) {
+			navigate('/login');
+			return;
+		}
+		navigate(`/game/lobby/${room}`);
 	}
 
   return (

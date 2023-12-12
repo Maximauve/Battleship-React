@@ -4,14 +4,15 @@ import { UserContext } from 'src/contexts/user/UserProvider';
 import useSocket from 'src/hooks/useSocket';
 import { GameStatus } from 'src/types/GameOptions';
 import { UserRoom } from 'src/types/user/UserRoom';
+import {useGameContext} from "../contexts/members/MemberProvider";
 
 const PreGame: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
 	const navigate = useNavigate();
 	const [{ user }] = useContext(UserContext);
 	const socket = useSocket();
-	const [members, setMembers] = useState<UserRoom[]>([]);
 	const [gameStatus, setGameStatus] = useState<GameStatus>(GameStatus.UNSTARTED);
+	const { members, setMembers, myUser, setMyUser } = useGameContext();
 
 	const startGame = () => {
 		socket?.emitWithAck('startGame', id).then((response: any) => {
@@ -49,6 +50,8 @@ const PreGame: React.FC = () => {
 		socket?.on('members', (newMembers: UserRoom[]) => {
 			setMembers(newMembers);
 			console.log('myUser : ', newMembers.find((member) => member.socketId === socket?.id));
+			const me = newMembers.find((member) => member.socketId === socket?.id);
+			setMyUser(me);
 		});
 
 		socket?.on('gameStatus', (status: GameStatus) => {
