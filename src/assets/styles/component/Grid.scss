@@ -14,9 +14,11 @@
 		grid-template-rows: repeat(10, 1fr);
 		grid-gap: 5px;
 		margin-top: 3vw;
-
-
 		padding: 2vw;
+
+		&.in-game {
+			margin-top: 103vw;
+		}
 
 		.row {
 			display: grid;
@@ -64,6 +66,10 @@
 		grid-template-columns: repeat(10, min(8vw, 50px));
 		grid-gap: 5px;
 		margin: 5vw 2vw 2vw;
+
+		&.in-game {
+			margin-top: 105vw;
+		}
 
 		.ship {
 			width: 100%;

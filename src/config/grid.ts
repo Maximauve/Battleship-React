@@ -1,7 +1,8 @@
 import { Coordinate } from 'src/types/game/Coordinate';
 import { Ship } from 'src/types/game/Ship';
 
-export const emptyGrid = Array(10).fill(Array(10).fill('E'));
+export const emptyGrid = Array(10).fill(null).map(() => Array(10).fill('E'));
+
 
 function getRandomInt(min: number, max: number) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
