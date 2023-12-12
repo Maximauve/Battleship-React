@@ -12,7 +12,7 @@ const PreGame: React.FC = () => {
 	const [{ user }] = useContext(UserContext);
 	const socket = useSocket();
 	const [gameStatus, setGameStatus] = useState<GameStatus>(GameStatus.UNSTARTED);
-	const { members, setMembers, myUser, setMyUser } = useGameContext();
+	const { members, setMembers, setMyUser } = useGameContext();
 
 	const startGame = () => {
 		socket?.emitWithAck('startGame', id).then((response: any) => {
@@ -58,6 +58,12 @@ const PreGame: React.FC = () => {
 			console.log('gameStatus : ', status);
 			setGameStatus(status);
 		});
+
+		return () => {
+			socket?.off('connect');
+			socket?.off('members');
+			socket?.off('gameStatus');
+		}
 	}, [gameStatus, id, navigate, socket, user]);
 
 	return (
