@@ -35,12 +35,11 @@ const PreGame: React.FC = () => {
 		}
 
 		socket?.on('connect', () => {
-			console.log('connected');
 			socket?.emitWithAck('joinRoom', id).then((response: any) => {
 				if (response.hasOwnProperty('error')) {
 					console.log('error from joinRoom : ', response.error);
 				} else {
-					console.log('joined room : response : ', response);
+					setGameStatus(response.gameStatus);
 				}
 			}).catch((err) => {
 				console.error(err);
