@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import useTranslations from 'src/hooks/useTranslation';
+=======
+>>>>>>> 9476aa027255a86b522481202c93cbb79f7c356c
 import React, { useContext, useEffect, useState } from 'react';
 import { GridDraggableBoats } from 'src/component/game/GridDraggableBoats';
 import { emptyGrid, generateRandomFleet } from 'src/config/grid';
@@ -22,7 +25,6 @@ const Game: React.FC = () => {
 	const [{ user }] = useContext(UserContext);
 	const i18n = useTranslations();
 	const { setMembers, myUser, setMyUser } = useGameContext();
-
 	const placeShips = () => {
 		console.log('placeShips : ', shipsIndexes)
 		socket?.emitWithAck('placeShips', shipsIndexes).then((response: any) => {

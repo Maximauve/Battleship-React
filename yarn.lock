@@ -1242,6 +1242,7 @@ has-flag@^4.0.0:
   integrity sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 i18n-js@^4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/i18n-js/-/i18n-js-4.3.2.tgz#ec5391f23c76f5374b53645c83d272914eb81291"
@@ -1251,13 +1252,18 @@ i18n-js@^4.3.2:
     lodash "*"
     make-plural "*"
 =======
+=======
+>>>>>>> 9476aa027255a86b522481202c93cbb79f7c356c
 hoist-non-react-statics@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
   dependencies:
     react-is "^16.7.0"
+<<<<<<< HEAD
 >>>>>>> 5d9f59d (Place random ships)
+=======
+>>>>>>> 9476aa027255a86b522481202c93cbb79f7c356c
 
 ignore@^5.2.0, ignore@^5.2.4:
   version "5.3.0"
