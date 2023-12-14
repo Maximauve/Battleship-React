@@ -9,8 +9,10 @@ import { UserRoom } from 'src/types/user/UserRoom';
 import {useGameContext} from "../contexts/members/MemberProvider";
 import {BattlePlace} from "../component/game/BattlePlace";
 import {GridBoats} from "../component/game/GridBoats";
+import {useParams} from "react-router-dom";
 
 const Game: React.FC = () => {
+	const { id } = useParams<{ id: string }>();
 	const [playerBoats, setPlayerBoats] = useState<string[][]>(emptyGrid);
 	const [battlePlace, setBattlePlace] = useState<string[][]>(emptyGrid);
 	const [gameStatus, setGameStatus] = useState<string>(GameStatus.PLACE_SHIPS);
@@ -33,6 +35,19 @@ const Game: React.FC = () => {
 	}
 
 	useEffect(() => {
+		socket?.on('connect', () => {
+			console.log('connected');
+			socket?.emitWithAck('joinRoom', id).then((response: any) => {
+				if (response.hasOwnProperty('error')) {
+					console.log('error from joinRoom : ', response.error);
+				} else {
+					setGameStatus(response.gameStatus);
+				}
+			}).catch((err) => {
+				console.error(err);
+			});
+		})
+
 		socket?.on('gameStatus', (status: GameStatus) => {
 			console.log("[GAME] gameStatus : ", status);
 			setGameStatus(status);
@@ -66,6 +81,7 @@ const Game: React.FC = () => {
 		});
 
 		return () => {
+			socket?.off('connect');
 			socket?.off('gameStatus');
 			socket?.off('playerBoats');
 			socket?.off('battlePlace');
