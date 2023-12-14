@@ -5,39 +5,6 @@ import { UserContext } from 'src/contexts/user/UserProvider';
 import { RoomOptions } from 'src/types/RoomOptions';
 
 const Home: React.FC = () => {
-  const [{ user }] = useContext(UserContext);
-
-	const [{ user }] = useContext(UserContext);
-	const [roomName, setRoomName] = useState<string>('');
-	const [error, setError] = useState<string>('');
-	const navigate = useNavigate();
-
-	const createRoom = () => {
-		if (!user) {
-			navigate('/login');
-			return;
-		}
-		const obj: RoomOptions = {
-			userId: user.id,
-			username: user.username,
-			socketId: null
-		};
-		redis.createRoom(obj, user).then((res) => {
-			navigate(`/game/lobby/${res.slug}`);
-		}).catch((err: any) => {
-			console.log("ERROR HOME => ", err);
-			setError(err.message)
-		});
-	}
-
-	const joinRoom = (room: string) => {
-		if (!user) {
-			navigate('/login');
-			return;
-		}
-		navigate(`/game/lobby/${room}`);
-	}
-
 	const [{ user }] = useContext(UserContext);
 	const [roomName, setRoomName] = useState<string>('');
 	const [error, setError] = useState<string>('');
