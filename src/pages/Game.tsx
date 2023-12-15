@@ -22,6 +22,7 @@ const Game: React.FC = () => {
 	const [{ user }] = useContext(UserContext);
 	const i18n = useTranslations();
 	const { setMembers, myUser, setMyUser } = useGameContext();
+
 	const placeShips = () => {
 		console.log('placeShips : ', shipsIndexes)
 		socket?.emitWithAck('placeShips', shipsIndexes).then((response: any) => {
