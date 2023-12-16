@@ -1,4 +1,4 @@
-import { Coordinate } from 'src/types/game/Coordinate';
+import {Coordinate, GridCoordinate} from 'src/types/game/Coordinate';
 import { Ship } from 'src/types/game/Ship';
 
 export const emptyGrid = Array(10).fill(null).map(() => Array(10).fill('E'));
@@ -108,3 +108,13 @@ export function canMove(updatedShip:  {[p: string]: {x: number, y: number}[]}): 
     }
     return true
 }
+
+export const changeOrientation = (updatedShip: {x: number, y: number}[]): {x: number, y: number}[] => {
+  const referenceCoordinate = updatedShip[0];
+  const isVertical = updatedShip.every(({ x }) => x === referenceCoordinate.x);
+  return updatedShip.map((_, index) => {
+    return isVertical
+      ? { x: referenceCoordinate.x + index, y: referenceCoordinate.y }
+      : { x: referenceCoordinate.x, y: referenceCoordinate.y + index };
+  });
+};

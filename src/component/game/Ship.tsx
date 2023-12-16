@@ -7,9 +7,10 @@ interface Props {
 	length: number;
 	isVertical: boolean;
 	position: GridCoordinate;
+  pivotShip: (shipId: string) => void;
 }
 
-const Ship: React.FC<Props> = ({ id, length, isVertical, position }) => {
+const Ship: React.FC<Props> = ({ id, length, isVertical, position, pivotShip }) => {
   const [{ isDragging }, drag] = useDrag({
     type: 'ship',
     item: { id, length, isVertical, position },
@@ -19,7 +20,7 @@ const Ship: React.FC<Props> = ({ id, length, isVertical, position }) => {
   });
 
   return (
-    <div
+    <div onClick={() => pivotShip(id)}
       ref={drag}
       className={`ship ${isVertical ? 'vertical' : 'horizontal'} ${isDragging ? 'dragging' : ''}`}
       style={{

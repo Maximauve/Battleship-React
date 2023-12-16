@@ -1,7 +1,7 @@
 import React from "react";
 import 'src/assets/styles/component/Grid.scss';
 import Ship from "./Ship";
-import { isVertical} from "src/config/grid";
+import {changeOrientation, isVertical} from "src/config/grid";
 
 export interface GridProps {
     grid: string[][]
@@ -19,11 +19,14 @@ export const GridBoats: React.FC<GridProps> = ({ grid, shipsIndexes }) => {
             const gridColumnEnd = Math.max(...shipCoordinates.map(coord => coord.x)) + 2;
 
             return (
-                <Ship key={shipId} id={shipId} length={shipCoordinates.length} isVertical={isVertical(shipCoordinates)} position={{ gridRowStart, gridRowEnd, gridColumnStart, gridColumnEnd }} />
+                <Ship key={shipId} id={shipId} length={shipCoordinates.length} isVertical={isVertical(shipCoordinates)} position={{ gridRowStart, gridRowEnd, gridColumnStart, gridColumnEnd }} pivotShip={pivotShip}/>
             );
         });
     };
 
+  const pivotShip = (shipId: string) => {
+    return shipId;
+  }
 
     return (
         <div className="grid-wrapper">
