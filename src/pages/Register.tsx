@@ -11,18 +11,16 @@ const Register: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
-  const nagivate = useNavigate();
+  const navigate = useNavigate();
+  const { state } = useLocation();
   const { setError } = useContext(ErrorContext);
   const { signUp } = useUser();
-  const { state } = useLocation();
   const i18n = useTranslations();
 
   const handleRegister = () => {
-    console.log('Register');
     signUp({ username, email, password }).then(() => {
-      console.log('Register response');
       setError(null);
-      nagivate(state?.from ? state.from : '/');
+      navigate(state?.from || '/');
     }).catch((err) => {
       setError(
         <>

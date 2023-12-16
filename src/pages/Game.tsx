@@ -9,8 +9,9 @@ import { UserRoom } from 'src/types/user/UserRoom';
 import {useGameContext} from "../contexts/members/MemberProvider";
 import {BattlePlace} from "../component/game/BattlePlace";
 import {GridBoats} from "../component/game/GridBoats";
-import {useParams} from "react-router-dom";
 import Button from 'src/components/Button';
+import {useNavigate, useParams} from "react-router-dom";
+
 
 const Game: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
@@ -22,6 +23,7 @@ const Game: React.FC = () => {
 	const socket = useSocket();
 	const [{ user }] = useContext(UserContext);
 	const i18n = useTranslations();
+	const navigate = useNavigate();
 	const { setMembers, myUser, setMyUser } = useGameContext();
 
 	const placeShips = () => {
