@@ -5,6 +5,7 @@ import useSocket from 'src/hooks/useSocket';
 import { GameStatus } from 'src/types/GameOptions';
 import { UserRoom } from 'src/types/user/UserRoom';
 import {useGameContext} from "../contexts/members/MemberProvider";
+import Button from 'src/components/Button';
 
 const PreGame: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
@@ -75,7 +76,7 @@ const PreGame: React.FC = () => {
 					</div>
 				);
 			})}
-			<button onClick={() => startGame()}>Start Game</button>
+			<Button text="Lancer" onClick={() => startGame()} />
 		</>
 	);
 }

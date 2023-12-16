@@ -6,7 +6,6 @@ const GlobalLayout: React.FC = () => {
 
   return (
     <div>
-      <p>Global Layout</p>
       <Outlet />
     </div>
   );

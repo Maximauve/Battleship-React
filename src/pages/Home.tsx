@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import redis from 'src/config/redis';
 import { UserContext } from 'src/contexts/user/UserProvider';
 import { RoomOptions } from 'src/types/RoomOptions';
+import 'src/assets/styles/pages/Home.scss';
+import Button from 'src/components/Button';
+import Input from 'src/components/Input';
 
 const Home: React.FC = () => {
 	const [{ user }] = useContext(UserContext);
@@ -37,13 +40,15 @@ const Home: React.FC = () => {
 	}
 
   return (
-    <div>
-      <h1>Home</h1>
-			{error && <div>{error}</div>}
-			{user && <div>{user.username} est connecté !</div>}
-			<button onClick={() => createRoom()}>Créer une partie</button>
-			<input type="text" placeholder="Nom de la partie" value={roomName} onChange={(event) => setRoomName(event.target.value)}/>
-			<button onClick={() => joinRoom(roomName)}>Rejoindre la partie</button>
+    <div className='home'>
+		
+        <h1>Bataille Navale</h1>
+		{error && <div>{error}</div>}
+		{user && <div>Bonjour {user.username}, Prêt.e à jouer ?</div>}
+		<Button text="Créer une partie" onClick={() => createRoom()} />
+		<Input type='text' text="Nom de la partie" value={roomName} onChange={(event) => setRoomName(event.target.value)} placeholder="Nom de la partie" />
+		<Button state="red" text="Rejoindre une partie" onClick={() => joinRoom(roomName)} />
+		
     </div>
   );
 }

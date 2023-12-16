@@ -1,5 +1,7 @@
 import { useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Button from "src/components/Button";
+import Input from "src/components/Input";
 import { ErrorContext } from "src/contexts/error/ErrorProvider";
 import useTranslations from "src/hooks/useTranslation";
 import useUser from "src/hooks/useUser";
@@ -32,9 +34,9 @@ const Login: React.FC = () => {
   return (
     <div>
       <h1>{i18n.t('login.h1')}</h1>
-      <input type="text" value={email} onChange={(event) => setEmail(event.target.value)} placeholder={i18n.t('login.placeholder.email')} />
-      <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder={i18n.t('login.placeholder.password')} />
-      <button onClick={handleLogin}>{i18n.t('login.submit')}</button>
+      <Input type="text" value={email} onChange={(event) => setEmail(event.target.value)} text={i18n.t('login.placeholder.email')} />
+      <Input type="password" value={password} onChange={(event) => setPassword(event.target.value)} text={i18n.t('login.placeholder.password')} />
+      <Button text={i18n.t('login.submit')} onClick={handleLogin} />
     </div>
   );
 }
