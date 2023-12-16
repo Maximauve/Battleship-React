@@ -1,7 +1,7 @@
 import React, {useRef} from "react";
 import 'src/assets/styles/component/Grid.scss';
 import Ship from "./Ship";
-import {canMove, isVertical} from "src/config/grid";
+import {canMove, changeOrientation, isVertical} from "src/config/grid";
 import {Coordinate, GridCoordinate} from "src/types/game/Coordinate";
 import { useDrop } from "react-dnd";
 
@@ -23,10 +23,20 @@ export const GridDraggableBoats: React.FC<GridProps> = ({ grid, shipsIndexes, se
 			const gridColumnEnd = Math.max(...shipCoordinates.map(coord => coord.x)) + 2;
 
 			return (
-				<Ship key={shipId} id={shipId} length={shipCoordinates.length} isVertical={isVertical(shipCoordinates)} position={{ gridRowStart, gridRowEnd, gridColumnStart, gridColumnEnd }} />
+				<Ship key={shipId} id={shipId} length={shipCoordinates.length} isVertical={isVertical(shipCoordinates)} position={{ gridRowStart, gridRowEnd, gridColumnStart, gridColumnEnd }} pivotShip={pivotShip}/>
 			);
 		});
 	};
+
+	const pivotShip = (shipId: string) => {
+		const updatedShips = { ...shipsIndexes };
+		let shipCoordinates = updatedShips[shipId];
+		shipCoordinates = changeOrientation(shipCoordinates);
+		updatedShips[shipId] = shipCoordinates;
+		if (canMove(updatedShips)) {
+			setShipsIndexes(updatedShips);
+		}
+	}
 
 	const moveShip = (shipId: string, initialRow: number, initialCol: number, newRow: number, newCol: number) => {
 		const updatedShips = { ...shipsIndexes };
