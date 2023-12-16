@@ -24,7 +24,6 @@ const GameLayout: React.FC = () => {
 
   return (
     <div>
-      <h1>Game Layout</h1>
         <GameProvider>
           <DndProvider backend={HTML5Backend}>
             <SocketProvider user={user} slug={id as string}>
