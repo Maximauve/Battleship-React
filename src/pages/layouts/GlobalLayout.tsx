@@ -7,7 +7,6 @@ const GlobalLayout: React.FC = () => {
   return (
     <div>
       <Link to="/login">Home</Link>
-      <p>Global Layout</p>
       <Outlet />
     </div>
   );

@@ -9,7 +9,9 @@ import { UserRoom } from 'src/types/user/UserRoom';
 import {useGameContext} from "../contexts/members/MemberProvider";
 import {BattlePlace} from "../component/game/BattlePlace";
 import {GridBoats} from "../component/game/GridBoats";
+import Button from 'src/components/Button';
 import {useNavigate, useParams} from "react-router-dom";
+
 
 const Game: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
@@ -113,7 +115,7 @@ const Game: React.FC = () => {
 					<div>C'est à vous de jouer !</div>
 				)}
 				<GridDraggableBoats grid={playerBoats} shipsIndexes={shipsIndexes} setShipsIndexes={setShipsIndexes}/>
-				<button onClick={() => placeShips()}>Placer mes bateaux</button>
+				<Button onClick={() => placeShips()} text="Valider mes bateaux"></Button>
 			</div>
 		);
 	}

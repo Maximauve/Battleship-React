@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
+.label-before {
+    line-height: 20px;
+    font-size: 12px;
+    top: -10px;
+    background: rgb(19,31,36);
+    padding: 0 6px;
+    left: 9px;
+}
+  
+.container {
+    width: 80%;
+    margin: 30px 10%;
+}
+  
+.field {
+
+    position: relative;
+    margin-bottom: 15px;
+    font-family: 'Orbitron', sans-serif;
+
+    label::before {
+        content: attr(title);
+        position: absolute;
+        top: 0;
+        left: 15px;
+        line-height: 40px;
+        font-size: 14px;
+        color: rgb(220,230,236);
+        transition: 300ms all;
+    }
+
+    input {
+        width: 100%;
+        line-height: 40px;
+        padding: 0 15px;
+        box-sizing: border-box;
+        font-size: 14px;
+        color: rgb(220,230,236);
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        background-color: rgb(19,31,36);
+        font-family: 'Orbitron', sans-serif;
+
+        &:focus {
+            outline: 0;
+            border-color: rgb(220,230,236);
+        }
+
+        &:valid + label::before {
+            @extend .label-before;
+            content: attr(data-title);
+        }
+
+        &:focus + label::before {
+            @extend .label-before;
+            color: rgb(220,230,236);
+        }
+    }
+}
