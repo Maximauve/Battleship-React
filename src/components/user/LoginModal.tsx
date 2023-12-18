@@ -8,7 +8,7 @@ const LoginModal: React.FC = () => {
 		<>
 			<input type="text" value={username} onChange={(event) => setUsername(event.target.value)}/>
 			<input type="password" value={password} onChange={(event) => setPassword(event.target.value)}/>
-			<button onClick={handleLogin}>Login</button>
+			<button>Login</button>
 		</>
 	);
 }
