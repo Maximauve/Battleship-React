@@ -1,4 +1,21 @@
 export const TRANSLATIONS_EN: { [key: string]: any } = {
+  layout: {
+    global: {
+      playerModal: {
+        seeProfile: 'My profile',
+        darkMode: 'Dark mode',
+        selectLanguage: 'Select language',
+        languageSelected: 'Language selected',
+      },
+    },
+  },
+  home: {
+    h1: 'BattleShip',
+    greetUser: 'Hello, {username} ! Ready to play ?',
+    createGame: 'Create a game',
+    joinInput: 'Name of the game',
+    joinGame: 'Join a game',
+  },
   game: {
     title: 'Game',
   },

@@ -7,6 +7,7 @@ import { TRANSLATIONS_EN } from "src/translations/translations.en";
 
 interface AppContextData {
   i18n: I18nType
+  setI18n: Dispatch<SetStateAction<I18nType>>;
   isThemeLight: boolean;
   setIsThemeLight: Dispatch<SetStateAction<boolean>>;
 }
@@ -24,17 +25,29 @@ const translations = {
   'en-US': TRANSLATIONS_EN
 }
 
-const i18n = new I18n(translations);
-i18n.locale = language;
-i18n.defaultLocale = 'fr-FR';
-i18n.enableFallback = true;
+interface Language {
+  name: string;
+  img: string;
+  values: string[];
+}
+export const availableLanguages: Language[] = [
+  { name: 'Français', img: '/drapeau_france.jpg', values: ['fr-FR', 'fr-EN'] },
+  { name: 'English', img: '/drapeau_anglais.png', values: ['en-GB', 'en-US'] }
+]
+
+const defaultI18n = new I18n(translations);
+defaultI18n.locale = language;
+defaultI18n.defaultLocale = 'fr-FR';
+defaultI18n.enableFallback = true;
 
 const AppProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [isThemeLight, setIsThemeLight] = useState(true);
+  const [i18n, setI18n] = useState<I18nType>(defaultI18n);
 
   return (
     <AppContext.Provider value={{
       i18n,
+      setI18n,
       isThemeLight,
       setIsThemeLight
     }}>
