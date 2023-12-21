@@ -9,6 +9,9 @@ export const TRANSLATIONS_EN: { [key: string]: any } = {
       password: 'Password',
     },
     submit: 'Login',
+    to: {
+      register: "Already have an account ?",
+    }
   },
   register: {
     h1: "Register",
@@ -19,5 +22,12 @@ export const TRANSLATIONS_EN: { [key: string]: any } = {
       confirmPassword: 'Confirm password',
     },
     submit: "Register",
+    to: {
+      login: "Already have an account ?",
+    }
   },
+  global: {
+    home: 'Home',
+    logout: 'Logout',
+  }
 };
