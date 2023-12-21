@@ -30,15 +30,21 @@ const Register: React.FC = () => {
     });
   }
 
+  const redirectTologin = () => {
+    navigate('/login');
+    return;
+  }
+
   return (
-    <>
+    <div className="log-container">
       <h1>{i18n.t('register.h1')}</h1>
       <Input type="text" value={username} onChange={(event) => setUsername(event.target.value)} text={i18n.t('register.placeholder.username')} />
       <Input type="text" value={email} onChange={(event) => setEmail(event.target.value)} text={i18n.t('register.placeholder.email')} />
       <Input type="password" value={password} onChange={(event) => setPassword(event.target.value)} text={i18n.t('register.placeholder.password')} />
       <Input type="password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} text={i18n.t('register.placeholder.confirmPassword')} />
       <Button text={i18n.t('register.submit')} onClick={handleRegister} />
-    </>
+      <Button text={i18n.t('register.to.login')} onClick={redirectTologin} />
+    </div>
   );
 }
 

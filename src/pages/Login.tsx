@@ -28,12 +28,18 @@ const Login: React.FC = () => {
     });
   }
 
+  const redirectToRegister = () => {
+    navigate('/register');
+    return;
+  }
+
   return (
-    <div>
+    <div className="log-container">
       <h1>{i18n.t('login.h1')}</h1>
       <Input type="text" value={email} onChange={(event) => setEmail(event.target.value)} text={i18n.t('login.placeholder.email')} />
       <Input type="password" value={password} onChange={(event) => setPassword(event.target.value)} text={i18n.t('login.placeholder.password')} />
       <Button text={i18n.t('login.submit')} onClick={handleLogin} />
+      <Button text={i18n.t('login.to.register')} onClick={redirectToRegister} />
     </div>
   );
 }
