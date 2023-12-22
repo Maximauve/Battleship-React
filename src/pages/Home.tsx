@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import redis from 'src/config/redis';
 import { UserContext } from 'src/contexts/user/UserProvider';
@@ -14,6 +14,10 @@ const Home: React.FC = () => {
 	const [error, setError] = useState<string>('');
 	const navigate = useNavigate();
 	const i18n = useTranslation();
+
+	useEffect(() => {
+		console.log('i18n => ', i18n);
+	}, [i18n]);
 
 	const createRoom = () => {
 		if (!user) {

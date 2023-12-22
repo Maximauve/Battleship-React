@@ -11,7 +11,7 @@ export const TRANSLATIONS_FR: { [key: string]: any } = {
   },
   home: {
     h1: 'Bataille Navale',
-    greetUser: 'Bonjour, {username} ! Prêt.e à jouer ?',
+    greetUser: 'Bonjour, %{username} ! Prêt.e à jouer ?',
     createGame: 'Créer une partie',
     joinInput: 'Nom de la partie',
     joinGame: 'Rejoindre une partie',

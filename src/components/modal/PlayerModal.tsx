@@ -2,6 +2,9 @@ import React, { useRef, useEffect, useState, useLayoutEffect, useContext, type M
 import { AppContext } from 'src/contexts/app/AppProvider';
 import { availableLanguages } from 'src/contexts/app/AppProvider';
 import "src/assets/styles/components/PlayerModal.scss";
+import useTranslations from 'src/hooks/useTranslation';
+import { I18nActionType } from 'src/contexts/app/appReducer';
+import useTheme from 'src/hooks/useTheme';
 interface Props {
     onClose: () => void;
 }
@@ -12,7 +15,9 @@ const PlayerModal: React.FC<Props> = ({onClose}) => {
     const languageUnselectedEl = useRef<HTMLButtonElement>(null);
     const [render, setRender] = useState(false);
     const [isLanguageSelectorOpen, setIsLanguageSelectorOpen] = useState(false);
-    const { i18n, setI18n, isThemeLight, setIsThemeLight } = useContext(AppContext);
+    const { dispatch } = useContext(AppContext);
+    const theme = useTheme();
+    const i18n = useTranslations();
     const currentLanguage = availableLanguages.find((language) => language.values.includes(i18n.locale));
 
 
@@ -34,7 +39,6 @@ const PlayerModal: React.FC<Props> = ({onClose}) => {
 
         document.addEventListener('click', clickHandler as any);
 
-        setRender(true);
         return () => {
             document.removeEventListener('click', clickHandler as any);
         }
@@ -44,15 +48,28 @@ const PlayerModal: React.FC<Props> = ({onClose}) => {
         setRender(true);
     }, [render])
 
+    const handleLanguageSelector = (language: string) => {
+        dispatch({type: I18nActionType.SET_LOCALE, payload: language});
+        setIsLanguageSelectorOpen(false);
+    }
+
+    const handleTheme = () => {
+        if (theme === '') {
+            dispatch({type: I18nActionType.SET_THEME_DARK, payload: null});
+        } else {
+            dispatch({type: I18nActionType.SET_THEME_LIGHT, payload: null});
+        }
+    }
+
     return (
-        <div className={"player-modal" +( !isThemeLight ? " theme-dark" : "")} ref={modalEl}>
+        <div className={"player-modal" + theme} ref={modalEl}>
             <div>
                 <button className="button-voir-profil">
                     {i18n.t('layout.global.playerModal.seeProfile')}
                 </button>
             </div>
             <div className='theme-selector'>
-                <input type="checkbox" id='theme-checkbox' checked={!isThemeLight} onChange={() => setIsThemeLight(!isThemeLight)}/>
+                <input type="checkbox" id='theme-checkbox' checked={theme !== ''} onChange={handleTheme}/>
                 <label htmlFor='theme-checkbox'>
                     {i18n.t('layout.global.playerModal.darkMode')}
                     <div className="slider"></div>
@@ -66,11 +83,7 @@ const PlayerModal: React.FC<Props> = ({onClose}) => {
                             <div className='language-flags' onClick={(e) => e.stopPropagation()}>
                                 {availableLanguages.map((language, i) => {
                                     return (
-                                        <button key={i} className='language-flag' onClick={() => {
-                                            i18n.locale = (language.values[0]);
-                                            setI18n(i18n);
-                                            setIsLanguageSelectorOpen(false);
-                                        }}>
+                                        <button key={i} className='language-flag' onClick={() => handleLanguageSelector(language.values[0])}>
                                             <img src={language.img} />
                                         </button>
                                     );
