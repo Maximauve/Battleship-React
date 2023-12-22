@@ -26,6 +26,7 @@ export const TRANSLATIONS_EN: { [key: string]: any } = {
   pregame: {
     h1: 'Waiting for players',
     startGame: 'Start the game',
+    replay: 'Replay',
   },
   login: {
     h1: 'Login',
