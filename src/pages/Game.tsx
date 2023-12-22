@@ -37,6 +37,19 @@ const Game: React.FC = () => {
 		});
 	}
 
+	const replay = () => {
+		socket?.emitWithAck('replay', id).then((response: any) => {
+			if (response.hasOwnProperty('error')) {
+				console.log('error from replay : ', response.error);
+			} else {
+				setShipsIndexes(generateRandomFleet());
+				setGameStatus(response.gameStatus);
+			}
+		}).catch((err) => {
+			console.error(err);
+		});
+	}
+
 	useEffect(() => {
 		socket?.on('connect', () => {
 			console.log('connected');
@@ -100,6 +113,7 @@ const Game: React.FC = () => {
 				{winner && (
 					<div>{winner.username} a gagné !</div>
 				)}
+				<Button text={i18n.t('game.replay')} onClick={() => replay()} />
 			</div>
 		);
 	}

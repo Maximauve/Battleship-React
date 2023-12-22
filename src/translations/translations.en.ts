@@ -18,6 +18,7 @@ export const TRANSLATIONS_EN: { [key: string]: any } = {
   },
   game: {
     title: 'Game',
+    replay: 'Replay',
   },
   login: {
     h1: 'Login',

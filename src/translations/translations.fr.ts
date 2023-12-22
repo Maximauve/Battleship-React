@@ -18,6 +18,7 @@ export const TRANSLATIONS_FR: { [key: string]: any } = {
   },
   game: {
     title: 'Partie',
+    replay: 'Rejouer',
   },
   login: {
     h1: 'Se connecter',
