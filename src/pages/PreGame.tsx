@@ -73,7 +73,7 @@ const PreGame: React.FC = () => {
 					</div>
 				);
 			})}
-			<Button text="Lancer" onClick={() => startGame()} />
+			<Button disabled={members.length != 2}   text="Lancer" onClick={() => startGame()} />
 		</>
 	);
 }
