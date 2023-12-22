@@ -27,7 +27,7 @@ export const TRANSLATIONS_EN: { [key: string]: any } = {
     },
     submit: 'Login',
     to: {
-      register: "Already have an account ?",
+      register: "Create account",
     }
   },
   register: {
@@ -40,7 +40,7 @@ export const TRANSLATIONS_EN: { [key: string]: any } = {
     },
     submit: "Register",
     to: {
-      login: "Already have an account ?",
+      login: "I have an account",
     }
   },
   global: {

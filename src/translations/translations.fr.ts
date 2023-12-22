@@ -27,7 +27,7 @@ export const TRANSLATIONS_FR: { [key: string]: any } = {
     },
     submit: 'Connexion',
     to: {
-      register: "Déjà un compte ?",
+      register: "Créer un compte",
     }
   },
   register: {
