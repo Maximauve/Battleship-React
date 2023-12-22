@@ -6,12 +6,14 @@ import { GameStatus } from 'src/types/GameOptions';
 import { UserRoom } from 'src/types/user/UserRoom';
 import {useGameContext} from "../contexts/members/MemberProvider";
 import Button from 'src/components/Button';
+import {ErrorContext} from "../contexts/error/ErrorProvider";
 
 const PreGame: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
 	const navigate = useNavigate();
 	const [{ user }] = useContext(UserContext);
 	const socket = useSocket();
+	const { setError } = useContext(ErrorContext);
 	const [gameStatus, setGameStatus] = useState<GameStatus>(GameStatus.UNSTARTED);
 	const { members, setMembers, setMyUser } = useGameContext();
 
@@ -36,6 +38,8 @@ const PreGame: React.FC = () => {
 			socket?.emitWithAck('joinRoom', id).then((response: any) => {
 				if (response.hasOwnProperty('error')) {
 					console.log('error from joinRoom : ', response.error);
+					setError(response.error);
+					navigate('/')
 				} else {
 					setGameStatus(response.gameStatus);
 				}
