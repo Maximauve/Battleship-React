@@ -7,11 +7,12 @@ import useTranslation from 'src/hooks/useTranslation';
 import 'src/assets/styles/pages/Home.scss';
 import Button from 'src/components/Button';
 import Input from 'src/components/Input';
+import {ErrorContext} from "../contexts/error/ErrorProvider";
 
 const Home: React.FC = () => {
 	const [{ user }] = useContext(UserContext);
 	const [roomName, setRoomName] = useState<string>('');
-	const [error, setError] = useState<string>('');
+	const { setError } = useContext(ErrorContext);
 	const navigate = useNavigate();
 	const i18n = useTranslation();
 
@@ -47,8 +48,7 @@ const Home: React.FC = () => {
 
   return (
     <div className='home'>
-        <h1>{i18n.t('home.h1')}</h1>
-			{error && <div>{error}</div>}
+			<h1>{i18n.t('home.h1')}</h1>
 			{user && <div>{i18n.t('home.greetUser', {username: user.username})}</div>}
 			<Button text={i18n.t('home.createGame')} onClick={() => createRoom()} />
 			<Input type='text' text={i18n.t('home.joinInput')} value={roomName} onChange={(event) => setRoomName(event.target.value)} placeholder={i18n.t('home.joinInput')} />
