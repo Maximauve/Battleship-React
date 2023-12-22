@@ -21,7 +21,7 @@ const GlobalLayout: React.FC = () => {
       </div>
       <div onClick={toggleModal} className="player-modal close">
         <button className='button-profil'>
-          <img src="/public/compte-utilisateur-1.png" alt="" />
+          <img src="/compte-utilisateur-1.png" alt="" />
         </button>
       </div>
       {isModalOpen &&
