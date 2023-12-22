@@ -1,5 +1,5 @@
 import React, {useRef} from "react";
-import 'src/assets/styles/component/Grid.scss';
+import 'src/assets/styles/components/Grid.scss';
 import {useGameContext} from "../../contexts/members/MemberProvider";
 import useSocket from "../../hooks/useSocket";
 import hitMp3 from '/hit.mp3';

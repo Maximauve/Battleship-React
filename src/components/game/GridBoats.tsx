@@ -1,5 +1,5 @@
 import React from "react";
-import 'src/assets/styles/component/Grid.scss';
+import 'src/assets/styles/components/Grid.scss';
 import Ship from "./Ship";
 import {isVertical} from "src/config/grid";
 

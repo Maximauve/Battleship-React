@@ -1,5 +1,5 @@
 import React, {useRef} from "react";
-import 'src/assets/styles/component/Grid.scss';
+import 'src/assets/styles/components/Grid.scss';
 import Ship from "./Ship";
 import {canMove, changeOrientation, isVertical} from "src/config/grid";
 import {Coordinate, GridCoordinate} from "src/types/game/Coordinate";

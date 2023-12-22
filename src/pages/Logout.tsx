@@ -12,6 +12,8 @@ const Logout = () => {
     logOut();
     navigate(state?.from || '/');
   }, [logOut, navigate, state]);
+
+  return null;
 }
 
 export default Logout;
