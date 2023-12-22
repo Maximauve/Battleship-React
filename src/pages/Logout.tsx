@@ -12,12 +12,6 @@ const Logout = () => {
     logOut();
     navigate(state?.from || '/');
   }, [logOut, navigate, state]);
-
-  return (
-    <div>
-      <h1>Logout</h1>
-    </div>
-  );
 }
 
 export default Logout;

@@ -7,6 +7,7 @@ import { UserRoom } from 'src/types/user/UserRoom';
 import {useGameContext} from "../contexts/members/MemberProvider";
 import Button from 'src/components/Button';
 import {ErrorContext} from "../contexts/error/ErrorProvider";
+import useTranslations from 'src/hooks/useTranslation';
 
 const PreGame: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
@@ -16,6 +17,7 @@ const PreGame: React.FC = () => {
 	const { setError } = useContext(ErrorContext);
 	const [gameStatus, setGameStatus] = useState<GameStatus>(GameStatus.UNSTARTED);
 	const { members, setMembers, setMyUser } = useGameContext();
+	const i18n = useTranslations();
 
 	const startGame = () => {
 		socket?.emitWithAck('startGame', id).then((response: any) => {
@@ -69,7 +71,7 @@ const PreGame: React.FC = () => {
 
 	return (
 		<>
-			<h1>PreGame</h1>
+			<h1>{i18n.t('pregame.h1')}</h1>
 			{members && members.map((member) => {
 				return (
 					<div key={member.userId}>
@@ -77,7 +79,7 @@ const PreGame: React.FC = () => {
 					</div>
 				);
 			})}
-			<Button disabled={members.length != 2}   text="Lancer" onClick={() => startGame()} />
+			<Button text={i18n.t('pregame.startGame')} onClick={() => startGame()} disabled={members.length != 2} />
 		</>
 	);
 }

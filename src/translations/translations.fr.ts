@@ -18,6 +18,14 @@ export const TRANSLATIONS_FR: { [key: string]: any } = {
   },
   game: {
     title: 'Partie',
+    winner: '%{username} a gagné !',
+    userIsOnline: '%{username} est en ligne',
+    validateShips: 'Valider mes bateaux',
+    yourTurn: "C'est à votre tour !",
+  },
+  pregame: {
+    h1: 'En attente de joueurs',
+    startGame: 'Lancer la partie',
   },
   login: {
     h1: 'Se connecter',

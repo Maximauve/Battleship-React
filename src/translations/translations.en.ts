@@ -18,6 +18,14 @@ export const TRANSLATIONS_EN: { [key: string]: any } = {
   },
   game: {
     title: 'Game',
+    winner: '%{username} won !',
+    userIsOnline: '%{username} is online',
+    validateShips: 'Validate my ships',
+    yourTurn: "It's your turn !",
+  },
+  pregame: {
+    h1: 'Waiting for players',
+    startGame: 'Start the game',
   },
   login: {
     h1: 'Login',
