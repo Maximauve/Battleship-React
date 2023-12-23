@@ -1,15 +1,7 @@
-.modal_content {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 60px;
-    height: 34px;
+.global {
+    width: inherit;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    // border: orange solid 5px;
 }
-
-.GlobalLayout input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-

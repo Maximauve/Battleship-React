@@ -2,11 +2,12 @@
 	position: relative;
 	display: flex;
 	justify-content: center;
+	// border: red solid 1px;
 }
 
 .grid {
 
-	position: absolute;
+	border: bleu solid 1px;
 
 	&.playing {
 
@@ -17,7 +18,7 @@
 		padding: 2vw;
 
 		&.in-game {
-			margin-top: 103vw;
+			// margin-top: 103vw;
 		}
 
 		.row {
@@ -71,7 +72,7 @@
 		margin: 5vw 2vw 2vw;
 
 		&.in-game {
-			margin-top: 105vw;
+			// margin-top: 105vw;
 		}
 
 		.ship {
@@ -80,6 +81,14 @@
 			background-color: rgba(0, 144, 0, 0.5);
 			border-radius: 5px;
 			z-index:20;
+		}
+
+		&.user-grid {
+			position: absolute;
+		}
+
+		&.moving-ship {
+			position: absolute;
 		}
 	}
 }

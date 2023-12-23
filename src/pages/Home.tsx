@@ -52,7 +52,7 @@ const Home: React.FC = () => {
 			{user && <div>{i18n.t('home.greetUser', {username: user.username})}</div>}
 			<Button text={i18n.t('home.createGame')} onClick={() => createRoom()} />
 			<Input type='text' text={i18n.t('home.joinInput')} value={roomName} onChange={(event) => setRoomName(event.target.value)} placeholder={i18n.t('home.joinInput')} />
-			<Button state="red" text={i18n.t('home.joinGame')} onClick={() => joinRoom(roomName)} />
+			<Button text={i18n.t('home.joinGame')} onClick={() => joinRoom(roomName)} />
     </div>
   );
 }
