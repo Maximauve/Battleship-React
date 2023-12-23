@@ -23,6 +23,7 @@
         padding: 15px;
         font-family: 'Orbitron', sans-serif;
         font-weight: medium;
+        color: inherit;
 
         &:disabled {
             background-color: rgb(55,70,79);
@@ -50,5 +51,6 @@
 
     &.gray {
         background-color: rgb(55,70,79);
+        color: white;
     }
 }

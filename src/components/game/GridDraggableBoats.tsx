@@ -110,7 +110,7 @@ export const GridDraggableBoats: React.FC<GridProps> = ({ grid, shipsIndexes, se
 					</div>
 				))}
 			</div>
-			<div className="grid placing">
+			<div className="grid placing moving-ship"> 
 				{shipsIndexes && renderShips(shipsIndexes)}
 			</div>
 		</div>

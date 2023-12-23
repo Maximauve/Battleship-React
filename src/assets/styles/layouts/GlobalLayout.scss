@@ -1,13 +1,7 @@
 .global {
     width: inherit;
-    height: inherit;
+    height: auto;
     margin: 0;
     padding: 0;
-}
-
-.global-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 20px;
+    // border: orange solid 5px;
 }

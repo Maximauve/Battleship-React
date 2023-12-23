@@ -55,5 +55,6 @@ export const TRANSLATIONS_EN: { [key: string]: any } = {
   global: {
     home: 'Home',
     logout: 'Logout',
+    back: 'Back',
   }
 };

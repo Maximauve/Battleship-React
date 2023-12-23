@@ -39,7 +39,7 @@ export const GridBoats: React.FC<GridProps> = ({ grid, shipsIndexes }) => {
                     </div>
                 ))}
             </div>
-            <div className="grid placing in-game">
+            <div className="grid placing in-game user-grid">
                 {shipsIndexes && renderShips(shipsIndexes)}
             </div>
         </div>
