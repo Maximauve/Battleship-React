@@ -10,8 +10,9 @@ import {useGameContext} from "src/contexts/members/MemberProvider";
 import {BattlePlace} from "src/components/game/BattlePlace";
 import {GridBoats} from "src/components/game/GridBoats";
 import Button from 'src/components/Button';
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import 'src/assets/styles/pages/Game.scss';
+import {ErrorContext} from "../contexts/error/ErrorProvider";
 
 
 const Game: React.FC = () => {
@@ -26,6 +27,8 @@ const Game: React.FC = () => {
 	const socket = useSocket();
 	const [{ user }] = useContext(UserContext);
 	const i18n = useTranslations();
+	const { setError } = useContext(ErrorContext);
+	const navigate = useNavigate();
 	const { setMembers, myUser, setMyUser, other, setOther } = useGameContext();
 
 	const placeShips = () => {
@@ -58,6 +61,8 @@ const Game: React.FC = () => {
 			socket?.emitWithAck('joinRoom', id).then((response: any) => {
 				if (response.hasOwnProperty('error')) {
 					console.log('error from joinRoom : ', response.error);
+					setError(response.error);
+					navigate('/')
 				} else {
 					setGameStatus(response.gameStatus);
 				}

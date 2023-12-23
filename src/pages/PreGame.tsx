@@ -31,7 +31,7 @@ const PreGame: React.FC = () => {
 	}
 
 	useEffect(() => {
-		if (id === undefined) {
+		if (id === undefined || id === '') {
 			navigate('/');
 		} else if (gameStatus !== GameStatus.UNSTARTED) {
 			navigate(`/game/${id}`);
