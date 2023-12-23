@@ -22,6 +22,7 @@ export const TRANSLATIONS_EN: { [key: string]: any } = {
     userIsOnline: '%{username} is online',
     validateShips: 'Validate my ships',
     yourTurn: "It's your turn !",
+    replay: 'Replay',
   },
   pregame: {
     h1: 'Waiting for players',

@@ -22,6 +22,7 @@ export const TRANSLATIONS_FR: { [key: string]: any } = {
     userIsOnline: '%{username} est en ligne',
     validateShips: 'Valider mes bateaux',
     yourTurn: "C'est à votre tour !",
+    replay: 'Rejouer',
   },
   pregame: {
     h1: 'En attente de joueurs',

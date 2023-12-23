@@ -121,7 +121,7 @@ const Game: React.FC = () => {
 	if (gameStatus === GameStatus.PLACE_SHIPS) {
 		return (
 			<div className='game'>
-				<h1>{i18n.t('game.h1')}</h1>
+				<h1>{i18n.t('game.title')}</h1>
 				{user && (
 					<p>{i18n.t('game.userIsOnline', { username: user.username })}</p>
 				)}
