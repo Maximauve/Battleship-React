@@ -162,7 +162,9 @@ const Game: React.FC = () => {
 			<div className='who-turn'>
 				{myUser?.hasToPlay && <p>{i18n.t('game.yourTurn')}</p>}
 			</div>
-			<BattlePlace grid={battlePlace} />
+			<div className={myUser?.hasToPlay ? "have-to-play" : ""}>
+				<BattlePlace grid={battlePlace} />
+			</div>
 			<GridBoats grid={playerBoats} shipsIndexes={shipsIndexes}/>
 		</div>
 	);
