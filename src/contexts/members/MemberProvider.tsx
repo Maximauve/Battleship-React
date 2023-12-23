@@ -6,6 +6,8 @@ interface GameContextProps {
     setMembers: Dispatch<SetStateAction<UserRoom[]>>;
     myUser: UserRoom | undefined;
     setMyUser: Dispatch<SetStateAction<UserRoom | undefined>>;
+    other: UserRoom | undefined;
+    setOther: Dispatch<SetStateAction<UserRoom | undefined>>;
 }
 
 const GameContext = createContext<GameContextProps | undefined>(undefined);
@@ -25,12 +27,15 @@ interface GameContextProviderProps {
 export const GameProvider: React.FC<GameContextProviderProps> = ({ children }) => {
     const [members, setMembers] = useState<UserRoom[]>([]);
     const [myUser, setMyUser] = useState<UserRoom | undefined>();
+    const [other, setOther] = useState<UserRoom | undefined>();
 
     const contextValue: GameContextProps = {
         members,
         setMembers,
         myUser,
         setMyUser,
+        other,
+        setOther
     };
 
     return (

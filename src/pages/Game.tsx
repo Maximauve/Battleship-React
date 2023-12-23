@@ -17,14 +17,16 @@ import 'src/assets/styles/pages/Game.scss';
 const Game: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
 	const [playerBoats, setPlayerBoats] = useState<string[][]>(emptyGrid);
+	const [opponentBoats, setOpponentBoats] = useState<string[][]>(emptyGrid);
 	const [battlePlace, setBattlePlace] = useState<string[][]>(emptyGrid);
 	const [gameStatus, setGameStatus] = useState<string>(GameStatus.PLACE_SHIPS);
 	const [shipsIndexes, setShipsIndexes] = useState<{ [key: string]: { x: number, y: number }[] }>(generateRandomFleet());
+	const [opponentShipsIndexes, setOpponentShipsIndexes] = useState<{ [key: string]: { x: number, y: number }[] }>({});
 	const [winner, setWinner] = useState<UserRoom | undefined>(undefined);
 	const socket = useSocket();
 	const [{ user }] = useContext(UserContext);
 	const i18n = useTranslations();
-	const { setMembers, myUser, setMyUser } = useGameContext();
+	const { setMembers, myUser, setMyUser, other, setOther } = useGameContext();
 
 	const placeShips = () => {
 		console.log('placeShips : ', shipsIndexes)
@@ -73,6 +75,16 @@ const Game: React.FC = () => {
 			console.log("[GAME] playerBoats : ", grid);
 			setPlayerBoats(grid);
 		});
+
+		socket?.on('opponentBoats', (grid: string[][]) => {
+			console.log("[GAME] opponentBoats : ", grid);
+			setOpponentBoats(grid);
+		});
+
+		socket?.on('opponentShipsIndexes', (shipsIndexes: { [key: string]: { x: number, y: number }[] }) => {
+			console.log("[GAME] opponentShipsIndexes : ", shipsIndexes);
+			setOpponentShipsIndexes(shipsIndexes);
+		});
 		
 		socket?.on('battlePlace', (grid: string[][]) => {
 			console.log("[GAME] battlePlace : ", grid);
@@ -89,6 +101,8 @@ const Game: React.FC = () => {
 			setMembers(members);
 			const me: UserRoom | undefined = members.find((member) => member.userId === user?.id)
 			setMyUser(me);
+			const other: UserRoom | undefined = members.find((member) => member.userId !== user?.id)
+			setOther(other);
 		});
 
 		socket?.on('winner', (winner: UserRoom) => {
@@ -104,6 +118,8 @@ const Game: React.FC = () => {
 			socket?.off('shipsIndexes');
 			socket?.off('members');
 			socket?.off('winner');
+			socket?.off('opponentBoats');
+			socket?.off('opponentShipsIndexes');
 		}
 	}, [socket, myUser, user, setMyUser, setMembers]);
 
@@ -113,6 +129,16 @@ const Game: React.FC = () => {
 				{winner && (
 					<div>{i18n.t('game.winner', { username: winner.username })}</div>
 				)}
+				<div className="reveal-container">
+					<div className="">
+						<div className="reveal-title">{myUser?.username}</div>
+						<GridBoats grid={playerBoats} shipsIndexes={shipsIndexes}/>
+					</div>
+					<div className="">
+						<div className="reveal-title">{other?.username}</div>
+						<GridBoats grid={opponentBoats} shipsIndexes={opponentShipsIndexes}/>
+					</div>
+				</div>
 				<Button text={i18n.t('game.replay')} onClick={() => replay()} />
 			</div>
 		);

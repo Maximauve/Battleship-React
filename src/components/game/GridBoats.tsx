@@ -9,7 +9,7 @@ export interface GridProps {
 }
 
 export const GridBoats: React.FC<GridProps> = ({ grid, shipsIndexes }) => {
-
+    console.log('shipsIndexes : ', shipsIndexes)
     const renderShips = (shipsIndexes: { [key: string]: { x: number, y: number }[] }) => {
         return Object.keys(shipsIndexes).map((shipId) => {
             const shipCoordinates = shipsIndexes[shipId];
