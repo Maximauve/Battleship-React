@@ -5,6 +5,9 @@ import "src/assets/styles/components/PlayerModal.scss";
 import useTranslations from 'src/hooks/useTranslation';
 import { I18nActionType } from 'src/contexts/app/appReducer';
 import useTheme from 'src/hooks/useTheme';
+import { Link } from 'react-router-dom';
+import { UserContext } from 'src/contexts/user/UserProvider';
+import Button from '../Button';
 interface Props {
     onClose: () => void;
 }
@@ -19,6 +22,7 @@ const PlayerModal: React.FC<Props> = ({onClose}) => {
     const theme = useTheme();
     const i18n = useTranslations();
     const currentLanguage = availableLanguages.find((language) => language.values.includes(i18n.locale));
+    const [ { user } ] = useContext(UserContext);
 
 
     useLayoutEffect(() => {
@@ -64,9 +68,7 @@ const PlayerModal: React.FC<Props> = ({onClose}) => {
     return (
         <div className={"player-modal" + theme} ref={modalEl}>
             <div>
-                <button className="button-voir-profil">
-                    {i18n.t('layout.global.playerModal.seeProfile')}
-                </button>
+                <Button text={i18n.t('layout.global.playerModal.seeProfile')} state="green"/>
             </div>
             <div className='theme-selector'>
                 <input type="checkbox" id='theme-checkbox' checked={theme !== ''} onChange={handleTheme}/>
@@ -98,6 +100,7 @@ const PlayerModal: React.FC<Props> = ({onClose}) => {
                     )}
                 </div>
             </div>
+            { user && <Link to="/logout"><Button text={i18n.t('global.logout')} state="red"/></Link> }
         </div>
     )
 }

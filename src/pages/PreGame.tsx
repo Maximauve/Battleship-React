@@ -8,6 +8,7 @@ import {useGameContext} from "../contexts/members/MemberProvider";
 import Button from 'src/components/Button';
 import {ErrorContext} from "../contexts/error/ErrorProvider";
 import useTranslations from 'src/hooks/useTranslation';
+import 'src/assets/styles/pages/PreGame.scss';
 
 const PreGame: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
@@ -67,10 +68,10 @@ const PreGame: React.FC = () => {
 			socket?.off('members');
 			socket?.off('gameStatus');
 		}
-	}, [gameStatus, id, navigate, socket, user]);
+	}, [gameStatus, id, navigate, setError, setMembers, setMyUser, socket, user]);
 
 	return (
-		<>
+		<div className='pre-game'>
 			<h1>{i18n.t('pregame.h1')}</h1>
 			{members && members.map((member) => {
 				return (
@@ -80,7 +81,7 @@ const PreGame: React.FC = () => {
 				);
 			})}
 			<Button text={i18n.t('pregame.startGame')} onClick={() => startGame()} disabled={members.length != 2} />
-		</>
+		</div>
 	);
 }
 

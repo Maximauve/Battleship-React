@@ -1,14 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import 'src/assets/styles/layouts/GlobalLayout.scss'
 import useTranslations from "src/hooks/useTranslation";
 import PlayerModal from 'src/components/modal/PlayerModal';
-import { UserContext } from 'src/contexts/user/UserProvider';
+import useTheme from 'src/hooks/useTheme';
 
 const GlobalLayout: React.FC = () => {
   const i18n = useTranslations();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [ { user } ] = useContext(UserContext);
+  const theme = useTheme();
 
   const toggleModal = () => {
     console.log('ToggleModal');
@@ -16,10 +16,9 @@ const GlobalLayout: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className={"global"+ theme}>
       <div className="global-container">
         <Link to="/">{i18n.t('global.home')}</Link>
-        { user && <Link to="/logout">{i18n.t('global.logout')}</Link> }
       </div>
       <div onClick={toggleModal} className="player-modal close">
         <button className='button-profil'>

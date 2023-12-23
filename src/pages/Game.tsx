@@ -11,6 +11,7 @@ import {BattlePlace} from "src/components/game/BattlePlace";
 import {GridBoats} from "src/components/game/GridBoats";
 import Button from 'src/components/Button';
 import {useParams} from "react-router-dom";
+import 'src/assets/styles/pages/Game.scss';
 
 
 const Game: React.FC = () => {
@@ -108,7 +109,7 @@ const Game: React.FC = () => {
 
 	if (gameStatus === GameStatus.ENDED) {
 		return (
-			<div>
+			<div className='game'>
 				{winner && (
 					<div>{i18n.t('game.winner', { username: winner.username })}</div>
 				)}
@@ -119,7 +120,7 @@ const Game: React.FC = () => {
 
 	if (gameStatus === GameStatus.PLACE_SHIPS) {
 		return (
-			<div>
+			<div className='game'>
 				<h1>{i18n.t('game.h1')}</h1>
 				{user && (
 					<p>{i18n.t('game.userIsOnline', { username: user.username })}</p>
@@ -131,7 +132,7 @@ const Game: React.FC = () => {
 	}
 	// else gameStatus === GameStatus.PLAY
 	return (
-		<div>
+		<div className='game'>
 			{myUser?.hasToPlay && <p>{i18n.t('game.yourTurn')}</p>}
 			<BattlePlace grid={battlePlace} />
 			<GridBoats grid={playerBoats} shipsIndexes={shipsIndexes}/>
