@@ -36,7 +36,7 @@ export const initializeState = (): appState => {
 
   return {
 		i18n: defaultI18n,
-		theme: ''
+		theme: ' theme-dark'
 	};
 }
 

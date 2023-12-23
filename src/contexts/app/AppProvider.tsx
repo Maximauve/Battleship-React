@@ -12,7 +12,7 @@ interface AppContextData {
 const defaultState = initializeState();
 export const AppContext = createContext<AppContextData>({
   i18n: defaultState.i18n,
-  theme: '',
+  theme: ' theme-dark',
   dispatch: () => null,
 });
 
