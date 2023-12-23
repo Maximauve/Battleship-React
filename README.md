@@ -1,30 +1,75 @@
-# React + TypeScript + Vite
+# BattleShip
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- [BattleShip](#battleship)
+  - [Accéder au projet :](#accéder-au-projet-)
+  - [Installer le projet localement :](#installer-le-projet-localement-)
+    - [Prérequis](#prérequis)
+    - [Installation](#installation)
+    - [Lancement](#lancement)
+    - [API](#api)
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Accéder au projet :
 
-## Expanding the ESLint configuration
+Le projet est déployé en ligne sur vercel à cette addresse: [https://maximauve-battleship.vercel.app/](https://battleship-react.vercel.app/)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Installer le projet localement :
 
-- Configure the top-level `parserOptions` property like this:
+### Prérequis
+Pour installer le projet localement, il faut avoir installé :
+- node >=18 avec yarn
+- docker 
+- postman ou équivalent
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
+### Installation
+Pour installer le projet, il faut cloner ce répository, mais également les répository [API](https://github.com/Maximauve/Battleship-API) et [DOCKER](https://github.com/Maximauve/Battleship-Docker) pour pouvoir tester de bout en bout !
+> à noter que les répo doivent êtres clonés dans le même dossier parent.
+
+### Lancement
+Pour lancer le projet, il faut :
+- faire un `docker-compose up` dans le répository docker
+- faire un `yarn` ou `yarn install` dans les répository API et React
+- Sur le répositoy API :
+  - faire un `yarn start:dev` pour lancer l'api
+  - suivre les (instructions à faire lors du lancement pour la 1ère fois de l'api)[#API]
+- Sur le répository React :
+  - faire un `yarn dev` pour lancer le front
+
+
+### API
+Lors du lancement de l'API pour la 1ère fois, il faudra se rendre avec un postman sur l'url `http://localhost:5000/users/auth/login` requête POST avec le body suivant :
+```json
+{
+  "email": "email@example.com",
+  "password": "Str0ngP@$$w0rD123"
 }
 ```
+> remplacer les informations ci-dessus par vos identifiants de compte que vous avez créer en front.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Récupérez le token reçu en réponse, et mettez-le dans la section "Authorization Bearer" de votre postman. \
+
+Maintenant, il va falloir ajouter une liste de mots dans l'api afin que celle-ci puisse générer des noms de rooms aléatoires. \
+Pour ce faire, il faudra effectuer une requête POST sur `http://localhost:5000/word-glossary` avec le body suivant :
+```json
+{
+  "words": [
+    "ship",
+    "shot",
+    "sea",
+    "battle",
+    "war",
+    "grid",
+    "position",
+    "attack",
+    "ocean",
+    "pearl",
+    "reef",
+    "maritime",
+    "sail",
+    "anchor",
+    "harbor",
+    "wave",
+  ]
+}
+```
+Cela devrait suffir pour effectuer des tests, libres à vous d'ajouter des mots à la liste.
