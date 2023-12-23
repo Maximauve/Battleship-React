@@ -1,16 +1,16 @@
 import useTranslations from 'src/hooks/useTranslation';
 import React, { useContext, useEffect, useState } from 'react';
-import { GridDraggableBoats } from 'src/component/game/GridDraggableBoats';
+import { GridDraggableBoats } from 'src/components/game/GridDraggableBoats';
 import { emptyGrid, generateRandomFleet } from 'src/config/grid';
 import { UserContext } from 'src/contexts/user/UserProvider';
 import useSocket from 'src/hooks/useSocket';
 import { GameStatus } from 'src/types/GameOptions';
 import { UserRoom } from 'src/types/user/UserRoom';
-import {useGameContext} from "../contexts/members/MemberProvider";
-import {BattlePlace} from "../component/game/BattlePlace";
-import {GridBoats} from "../component/game/GridBoats";
+import {useGameContext} from "src/contexts/members/MemberProvider";
+import {BattlePlace} from "src/components/game/BattlePlace";
+import {GridBoats} from "src/components/game/GridBoats";
 import Button from 'src/components/Button';
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 
 
 const Game: React.FC = () => {
@@ -23,7 +23,6 @@ const Game: React.FC = () => {
 	const socket = useSocket();
 	const [{ user }] = useContext(UserContext);
 	const i18n = useTranslations();
-	const navigate = useNavigate();
 	const { setMembers, myUser, setMyUser } = useGameContext();
 
 	const placeShips = () => {
@@ -31,6 +30,19 @@ const Game: React.FC = () => {
 		socket?.emitWithAck('placeShips', shipsIndexes).then((response: any) => {
 			if (response.hasOwnProperty('error')) {
 				console.log('error from placeShips : ', response.error);
+			}
+		}).catch((err) => {
+			console.error(err);
+		});
+	}
+
+	const replay = () => {
+		socket?.emitWithAck('replay', id).then((response: any) => {
+			if (response.hasOwnProperty('error')) {
+				console.log('error from replay : ', response.error);
+			} else {
+				setShipsIndexes(generateRandomFleet());
+				setGameStatus(response.gameStatus);
 			}
 		}).catch((err) => {
 			console.error(err);
@@ -98,8 +110,9 @@ const Game: React.FC = () => {
 		return (
 			<div>
 				{winner && (
-					<div>{winner.username} a gagné !</div>
+					<div>{i18n.t('game.winner', { username: winner.username })}</div>
 				)}
+				<Button text={i18n.t('game.replay')} onClick={() => replay()} />
 			</div>
 		);
 	}
@@ -107,22 +120,19 @@ const Game: React.FC = () => {
 	if (gameStatus === GameStatus.PLACE_SHIPS) {
 		return (
 			<div>
-				<h1>Game</h1>
+				<h1>{i18n.t('game.h1')}</h1>
 				{user && (
-					<div>{user.username} est connecté !</div>
-				)}
-				{myUser?.hasToPlay && (
-					<div>C'est à vous de jouer !</div>
+					<p>{i18n.t('game.userIsOnline', { username: user.username })}</p>
 				)}
 				<GridDraggableBoats grid={playerBoats} shipsIndexes={shipsIndexes} setShipsIndexes={setShipsIndexes}/>
-				<Button onClick={() => placeShips()} text="Valider mes bateaux"></Button>
+				<Button onClick={() => placeShips()} text={i18n.t('game.validateShips')} />
 			</div>
 		);
 	}
 	// else gameStatus === GameStatus.PLAY
 	return (
 		<div>
-			{myUser?.hasToPlay && <div>C'est à vous de jouer !</div>}
+			{myUser?.hasToPlay && <p>{i18n.t('game.yourTurn')}</p>}
 			<BattlePlace grid={battlePlace} />
 			<GridBoats grid={playerBoats} shipsIndexes={shipsIndexes}/>
 		</div>

@@ -1,17 +1,24 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import redis from 'src/config/redis';
 import { UserContext } from 'src/contexts/user/UserProvider';
 import { RoomOptions } from 'src/types/RoomOptions';
+import useTranslation from 'src/hooks/useTranslation';
 import 'src/assets/styles/pages/Home.scss';
 import Button from 'src/components/Button';
 import Input from 'src/components/Input';
+import {ErrorContext} from "../contexts/error/ErrorProvider";
 
 const Home: React.FC = () => {
 	const [{ user }] = useContext(UserContext);
 	const [roomName, setRoomName] = useState<string>('');
-	const [error, setError] = useState<string>('');
+	const { setError } = useContext(ErrorContext);
 	const navigate = useNavigate();
+	const i18n = useTranslation();
+
+	useEffect(() => {
+		console.log('i18n => ', i18n);
+	}, [i18n]);
 
 	const createRoom = () => {
 		if (!user) {
@@ -41,14 +48,11 @@ const Home: React.FC = () => {
 
   return (
     <div className='home'>
-		
-        <h1>Bataille Navale</h1>
-		{error && <div>{error}</div>}
-		{user && <div>Bonjour {user.username}, Prêt.e à jouer ?</div>}
-		<Button text="Créer une partie" onClick={() => createRoom()} />
-		<Input type='text' text="Nom de la partie" value={roomName} onChange={(event) => setRoomName(event.target.value)} placeholder="Nom de la partie" />
-		<Button state="red" text="Rejoindre une partie" onClick={() => joinRoom(roomName)} />
-		
+			<h1>{i18n.t('home.h1')}</h1>
+			{user && <div>{i18n.t('home.greetUser', {username: user.username})}</div>}
+			<Button text={i18n.t('home.createGame')} onClick={() => createRoom()} />
+			<Input type='text' text={i18n.t('home.joinInput')} value={roomName} onChange={(event) => setRoomName(event.target.value)} placeholder={i18n.t('home.joinInput')} />
+			<Button state="red" text={i18n.t('home.joinGame')} onClick={() => joinRoom(roomName)} />
     </div>
   );
 }

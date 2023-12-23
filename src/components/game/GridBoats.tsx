@@ -1,7 +1,7 @@
 import React from "react";
-import 'src/assets/styles/component/Grid.scss';
+import 'src/assets/styles/components/Grid.scss';
 import Ship from "./Ship";
-import {changeOrientation, isVertical} from "src/config/grid";
+import {isVertical} from "src/config/grid";
 
 export interface GridProps {
     grid: string[][]

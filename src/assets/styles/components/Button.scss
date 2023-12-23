@@ -23,6 +23,13 @@
         font-family: 'Orbitron', sans-serif;
         font-weight: medium;
 
+        &:disabled {
+            background-color: rgb(55,70,79);
+            color: rgb(255,255,255);
+            transition: none;
+            transform: none;
+        }
+
         &:active {
             transform: translateY(0px);
             transition: 0.1s ease-in-out;
