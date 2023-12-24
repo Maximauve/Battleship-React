@@ -11,7 +11,7 @@
 
 ## Accéder au projet :
 
-Le projet est déployé en ligne sur vercel à cette addresse: [https://maximauve-battleship.vercel.app/](https://battleship-react.vercel.app/)
+Le projet est déployé en ligne sur vercel à cette addresse: [https://maximauve-battleship.vercel.app/](https://maximauve-battleship.vercel.app/)
 
 ## Installer le projet localement :
 
